@@ -27,7 +27,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${tool.title[current]} | ${current === "ar" ? "تاجر كيت" : "TajerKit"}`,
+    title: `${tool.title[current]} | ${current === "ar" ? "تاجر تولز" : "TajerTools"}`,
     description: tool.summary[current],
     alternates: {
       canonical: `/${current}/tools/${tool.slug}`,

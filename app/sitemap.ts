@@ -3,7 +3,7 @@ import { tools } from "@/lib/content";
 import { getPosts } from "@/lib/actions/blog";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://tajerkit.com";
+  const baseUrl = "https://tajertools.com";
   const locales = ["en", "ar"];
   const staticRoutes = ["", "/tools", "/blog", "/contact"];
 

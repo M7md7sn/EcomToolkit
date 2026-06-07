@@ -39,7 +39,7 @@ export async function generateMetadata({
   const post = res.data;
 
   return {
-    title: `${isLocale(locale) && locale === "ar" ? post.titleAr : post.titleEn} | ${isLocale(locale) && locale === "ar" ? "تاجر كيت" : "TajerKit"}`,
+    title: `${isLocale(locale) && locale === "ar" ? post.titleAr : post.titleEn} | ${isLocale(locale) && locale === "ar" ? "تاجر تولز" : "TajerTools"}`,
     description: isLocale(locale) && locale === "ar" ? post.introAr : post.introEn
   };
 }

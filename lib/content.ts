@@ -457,7 +457,7 @@ export const tools: Tool[] = [
 
 export const copy = {
   en: {
-    brand: "TajerKit",
+    brand: "TajerTools",
     navTools: "Tools",
     navBlog: "Blog",
     navContact: "Contact",
@@ -575,7 +575,7 @@ export const copy = {
     templatePreview: "Template preview (non-AI fallback)"
   },
   ar: {
-    brand: "تاجر كيت",
+    brand: "تاجر تولز",
     navTools: "الأدوات",
     navBlog: "المدونة",
     navContact: "تواصل",

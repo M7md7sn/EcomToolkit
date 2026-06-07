@@ -93,8 +93,8 @@ export async function generateMetadata({
   const current = isLocale(locale) ? locale : "en";
   const title =
     current === "ar"
-      ? "تاجر كيت | حاسبات وأدوات مجانية لأصحاب المتاجر"
-      : "TajerKit | Free Ecommerce Calculators for Store Owners";
+      ? "تاجر تولز | حاسبات وأدوات مجانية لأصحاب المتاجر"
+      : "TajerTools | Free Ecommerce Calculators for Store Owners";
 
   return {
     title,

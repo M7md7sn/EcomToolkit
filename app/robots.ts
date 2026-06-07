@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/admin/",
     },
-    sitemap: "https://tajerkit.com/sitemap.xml",
+    sitemap: "https://tajertools.com/sitemap.xml",
   };
 }

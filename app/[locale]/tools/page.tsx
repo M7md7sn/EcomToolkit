@@ -13,8 +13,8 @@ export async function generateMetadata({
   return {
     title:
       current === "ar"
-        ? "كل أدوات التجارة الإلكترونية | تاجر كيت"
-        : "All Ecommerce Tools | TajerKit",
+        ? "كل أدوات التجارة الإلكترونية | تاجر تولز"
+        : "All Ecommerce Tools | TajerTools",
     description:
       current === "ar"
         ? "حاسبات وأدوات مجانية للتسعير والربح والشحن والسياسات ومحتوى المنتجات."
