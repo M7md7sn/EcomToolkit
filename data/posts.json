@@ -1,0 +1,88 @@
+[
+  {
+    "slug": "ecommerce-profit-calculation",
+    "categoryEn": "Profitability",
+    "categoryAr": "الربحية",
+    "titleEn": "How to calculate true ecommerce profit",
+    "titleAr": "كيفية حساب ربح متجر إلكتروني",
+    "introEn": "A practical guide to calculating profit after product cost, shipping, ads, payment fees, and returns.",
+    "introAr": "دليل عملي لحساب الربح بعد تكلفة المنتج والشحن والإعلانات ورسوم الدفع والمرتجعات.",
+    "contentEn": "# How to Calculate True Ecommerce Profit\n\nMany store owners focus only on top-line revenue, but real success lies in your **net profit**. To calculate your net profit accurately, you must subtract all operational and acquisition expenses.\n\n### The Profit Formula:\n\n`Net Profit = Revenue - COGS - Shipping - Ads - Payment Fees - Returns Reserve`\n\n### Key Components:\n1. **COGS (Cost of Goods Sold)**: The wholesale cost of the product.\n2. **Shipping & COD Fees**: The cost to ship the order, plus any collection fees charged by shipping companies.\n3. **Ad Spend (CAC)**: The customer acquisition cost through Facebook, TikTok, or Google Ads.\n4. **Payment Gateway Fees**: Credit card processing (e.g. 2.9% + $0.30) or cash handling fees.\n5. **Return Risk**: A reserve (usually 5% to 10%) set aside for failed deliveries and refunds.",
+    "contentAr": "# كيفية حساب ربح متجر إلكتروني حقيقي\n\nيركز العديد من أصحاب المتاجر على الإيرادات الإجمالية، ولكن النجاح الحقيقي يكمن في **صافي الربح**. لحساب صافي ربحك بدقة، يجب عليك طرح جميع النفقات التشغيلية والتسويقية.\n\n### معادلة الأرباح:\n\n`صافي الربح = الإيرادات - تكلفة المنتج - الشحن - الإعلانات - رسوم الدفع - نسبة المرتجعات`\n\n### المكونات الأساسية:\n1. **تكلفة المنتج (COGS)**: التكلفة الأساسية لشراء أو تصنيع السلعة.\n2. **تكلفة الشحن والدفع عند الاستلام**: تكلفة توصيل الطلب للعميل ورسوم تحصيل الأموال.\n3. **الإنفاق الإعلاني (CAC)**: تكلفة جذب العميل من منصات مثل تيك توك، فيسبوك، أو جوجل.\n4. **رسوم بوابة الدفع**: العمولات التي تقتطعها بوابات الدفع (مثل 2.9% + 0.30 دولار).\n5. **مخاطر المرتجعات**: ميزانية احتياطية (تتراوح عادة بين 5% إلى 15%) للطلبات المرتجعة أو الفاشلة.",
+    "tools": [
+      "ecommerce-profit-margin-calculator",
+      "payment-gateway-fee-calculator",
+      "shipping-cost-calculator"
+    ],
+    "createdAt": "2026-06-06T20:58:22.367Z",
+    "updatedAt": "2026-06-06T20:58:22.534Z"
+  },
+  {
+    "slug": "shipping-cost-egypt-saudi",
+    "categoryEn": "Shipping",
+    "categoryAr": "الشحن",
+    "titleEn": "Shipping costs in Egypt and Saudi Arabia",
+    "titleAr": "تكلفة الشحن في مصر والسعودية",
+    "introEn": "Plan shipping, COD, and delivery risk before your store loses margin after fulfillment.",
+    "introAr": "خطط للشحن والدفع عند الاستلام ومخاطر التوصيل قبل أن يخسر المتجر هامشه بعد التنفيذ.",
+    "contentEn": "# Shipping Costs in Egypt and Saudi Arabia\n\nOperating in Egypt and Saudi Arabia (KSA) offers massive opportunity, but shipping costs and Cash on Delivery (COD) logistics present unique challenges.\n\n### Shipping Variables to Plan:\n- **Volumetric Weight**: Shipping carriers charge based on package size, not just actual weight. Use compact packaging to avoid extra fees.\n- **COD Collection Fees**: Companies charge a percentage or fixed fee for collecting cash from customers.\n- **Delivery Success Rate**: In Egypt and Saudi Arabia, COD return rates can be high. Plan for a 10% to 20% non-delivery rate, and factor the return shipping cost into your pricing.",
+    "contentAr": "# تكاليف الشحن في مصر والمملكة العربية السعودية\n\nالعمل في مصر والسعودية يوفر فرصاً ضخمة، ولكن تكاليف الشحن ولوجستيات الدفع عند الاستلام (COD) تفرض تحديات فريدة.\n\n### متغيرات الشحن الواجب تخطيطها:\n- **الوزن الحجمي**: تفرض شركات الشحن الرسوم بناءً على حجم الطرد وليس وزنه فقط. استخدم تغليفاً مضغوطاً لتجنب الرسوم الإضافية.\n- **رسوم تحصيل الدفع عند الاستلام**: تفرض الشركات نسبة مئوية أو رسوماً ثابتة لتحصيل الأموال نقداً.\n- **نسبة نجاح التوصيل**: في نظام الدفع عند الاستلام، قد ترفض بعض الطلبات. خطط لنسبة فشل توصيل تتراوح بين 10% إلى 20%، واحتسب تكلفة شحن المرتجع ضمن تسعيرك.",
+    "tools": [
+      "shipping-cost-calculator",
+      "cod-profit-calculator",
+      "ecommerce-vat-calculator"
+    ],
+    "createdAt": "2026-06-06T20:04:00.000Z"
+  },
+  {
+    "slug": "product-pricing-strategy",
+    "categoryEn": "Pricing",
+    "categoryAr": "التسعير",
+    "titleEn": "How to price products professionally",
+    "titleAr": "كيفية تسعير المنتجات باحتراف",
+    "introEn": "A pricing workflow for ecommerce products that balances margin, demand, fees, and acquisition cost.",
+    "introAr": "مسار عملي لتسعير منتجات التجارة الإلكترونية مع مراعاة الهامش والطلب والرسوم وتكلفة اكتساب العميل.",
+    "contentEn": "# How to Price Products Professionally\n\nPricing is not just about doubling your product cost. A professional pricing strategy accounts for all transactional costs, taxes, and customer acquisition costs.\n\n### Professional Pricing Workflow:\n1. **Determine COGS**: Include packaging and product importing fees.\n2. **Add Transaction & Gateway Fees**: Account for Stripe, PayPal, or COD margins.\n3. **Include Target Margin**: What margin do you need to scale the business?\n4. **Test Price Elasticity**: Sometimes a higher price conveys more value and converts better than a cheap price.",
+    "contentAr": "# كيفية تسعير المنتجات باحترافية\n\nالتسعير لا يقتصر على مضاعفة تكلفة المنتج فقط. استراتيجية التسعير الاحترافية تأخذ في الاعتبار جميع تكاليف المعاملات، الضرائب، وتكاليف جذب العملاء.\n\n### خطوات التسعير الاحترافي:\n1. **تحديد تكلفة المنتج الإجمالية**: تشمل التغليف ورسوم استيراد وشحن المنتج.\n2. **إضافة رسوم المعاملات وبوابات الدفع**: مثل عمولات مدى أو فيزا أو رسوم الدفع عند الاستلام.\n3. **إضافة الهامش المستهدف**: ما هو الهامش الذي تحتاجه لتغطية مصاريفك وتطوير عملك؟\n4. **اختبار مرونة السعر**: في بعض الأحيان، السعر المرتفع يمنح شعوراً بالجودة ويحقق مبيعات أفضل من السعر الرخيص.",
+    "tools": [
+      "product-pricing-calculator",
+      "ecommerce-profit-margin-calculator",
+      "discount-profit-impact-calculator"
+    ],
+    "createdAt": "2026-06-06T20:03:00.000Z"
+  },
+  {
+    "slug": "roas-for-beginners",
+    "categoryEn": "Marketing",
+    "categoryAr": "التسويق",
+    "titleEn": "ROAS explained for beginners",
+    "titleAr": "شرح ROAS للمبتدئين",
+    "introEn": "Learn what ROAS means, how to calculate it, and how to find your break-even target.",
+    "introAr": "تعلم معنى ROAS وطريقة حسابه وكيف تحدد نقطة التعادل في حملاتك.",
+    "contentEn": "# ROAS Explained for Beginners\n\n**ROAS** stands for *Return on Ad Spend*. It measures how much revenue you earn for every dollar spent on advertising.\n\n### The ROAS Formula:\n\n`ROAS = Revenue / Ad Spend`\n\nFor example, if you spend $100 on Facebook Ads and generate $400 in sales, your ROAS is **4.0x** (or 400%).\n\n### Finding Your Break-Even ROAS\nYour break-even ROAS is the threshold where you make zero profit but lose zero money. Knowing this number is critical because any ad campaign running below your break-even ROAS is actively losing you money.",
+    "contentAr": "# شرح العائد على الإعلانات (ROAS) للمبتدئين\n\n**ROAS** هو اختصار لـ *Return on Ad Spend* (العائد على الإنفاق الإعلاني). وهو يقيس كمية الإيرادات التي تحققها مقابل كل دولار تنفقه على الإعلانات.\n\n### معادلة حساب ROAS:\n\n`ROAS = الإيرادات / الإنفاق الإعلاني`\n\nعلى سبيل المثال، إذا أنفقت 100 دولار على إعلانات فيسبوك وحققت مبيعات بقيمة 400 دولار، فإن الـ ROAS الخاص بك هو **4.0x** (أو 400%).\n\n### نقطة التعادل للـ ROAS\nنقطة تعادل الـ ROAS هي العتبة التي لا تحقق فيها أي ربح ولكنك لا تخسر أي أموال أيضاً. معرفة هذا الرقم ضرورية لأن أي حملة تحقق عائداً أقل من نقطة التعادل تعني خسارة مباشرة لمتجرك.",
+    "tools": [
+      "roas-calculator",
+      "break-even-roas-calculator",
+      "dropshipping-profit-calculator"
+    ],
+    "createdAt": "2026-06-06T20:02:00.000Z"
+  },
+  {
+    "slug": "clothing-profit-margin",
+    "categoryEn": "Pricing",
+    "categoryAr": "التسعير",
+    "titleEn": "Best profit margin for clothing stores",
+    "titleAr": "أفضل هامش ربح للملابس",
+    "introEn": "Understand healthy margins for apparel stores and when discounts start damaging profit.",
+    "introAr": "افهم الهامش الصحي لمتاجر الملابس ومتى يبدأ الخصم في إضعاف الربح.",
+    "contentEn": "# Best Profit Margin for Clothing Stores\n\nApparel is one of the most popular ecommerce categories, but it is highly competitive and has a high return rate due to sizing issues.\n\n### What is a healthy margin?\n- **Gross Margin**: Should be between **60% and 80%**. This means if a shirt costs $10 to source, it should retail for $30 to $50.\n- **Net Margin**: A healthy clothing store should target **10% to 20%** net profit margin after accounting for marketing and shipping.\n\n### The Danger of Discounts\nOffering a 20% discount does not just reduce your revenue by 20%—it can slice your net profit by 50% or more. Always calculate the impact of a promotion before launching it to ensure you remain profitable.",
+    "contentAr": "# أفضل هامش ربح لمتاجر الملابس\n\nتعد الملابس أحد أكثر تصنيفات التجارة الإلكترونية شيوعاً، ولكنها تشهد منافسة شديدة ونسبة مرتجعات مرتفعة بسبب قياسات الملابس.\n\n### ما هو الهامش الصحي؟\n- **هامش الربح الإجمالي**: يجب أن يكون بين **60% إلى 80%**. هذا يعني أنه إذا كانت تكلفة القميص 10 دولارات، فيجب بيعه بسعر يتراوح بين 30 إلى 50 دولاراً.\n- **صافي الهامش**: يجب أن يستهدف متجر الملابس الصحي صافي ربح يتراوح بين **10% إلى 20%** بعد خصم الإعلانات والشحن.\n\n### خطورة الخصومات المستمرة\nتقديم خصم بنسبة 20% لا يقلل إيراداتك بنسبة 20% فقط، بل يمكنه أن يقتطع 50% أو أكثر من صافي أرباحك الحقيقية. احسب دائماً تأثير الخصم قبل إطلاقه.",
+    "tools": [
+      "product-pricing-calculator",
+      "discount-profit-impact-calculator",
+      "ecommerce-profit-margin-calculator"
+    ],
+    "createdAt": "2026-06-06T20:01:00.000Z"
+  }
+]
