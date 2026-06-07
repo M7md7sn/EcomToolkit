@@ -24,12 +24,17 @@ const socialProof = {
   ],
 };
 
-const guideArticles = {
+const guideArticles: Record<
+  string,
+  { title: string; category: string; href: string; description?: string }[]
+> = {
   en: [
     {
       title: "How to calculate true ecommerce profit",
       category: "Profitability",
       href: "/blog/ecommerce-profit-calculation",
+      description:
+        "Learn how to accurately factor in product costs, marketing spend, platform fees, and shipping costs to discover your true net profit.",
     },
     {
       title: "Best profit margin for clothing stores",
@@ -57,6 +62,8 @@ const guideArticles = {
       title: "كيفية حساب ربح متجر إلكتروني",
       category: "الربحية",
       href: "/blog/ecommerce-profit-calculation",
+      description:
+        "تعرف على كيفية احتساب تكاليف المنتجات، مصاريف التسويق، رسوم المنصات، وتكاليف الشحن بدقة لتصل إلى صافي ربحك الحقيقي.",
     },
     {
       title: "أفضل هامش ربح للملابس",
@@ -197,7 +204,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section className="section-block guide-section">
         <div className="section-heading">
           <div>
-            <span className="eyebrow">{isAr ? "مركز مقالات النمو" : "SEO content hub"}</span>
             <h2>{isAr ? "دليل التجارة الإلكترونية" : "Ecommerce growth guide"}</h2>
           </div>
           <Link className="text-link" href={`/${locale}/blog`}>
@@ -218,6 +224,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 {article.category}
               </span>
               <h3>{article.title}</h3>
+              {index === 0 && article.description && (
+                <p className="guide-card-desc">{article.description}</p>
+              )}
               <span className="guide-link">
                 {isAr ? "اقرأ الدليل" : "Read guide"}
                 <ArrowRight size={15} />
@@ -235,8 +244,64 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <span />
           </div>
           <div className="mockup-hero">
-            <div />
-            <div />
+            <div className="mockup-card dashboard-card">
+              <div className="card-header">
+                <span className="card-title">{isAr ? "معدل التحويل" : "Conversion Rate"}</span>
+                <span className="trend-badge">↑ 34%</span>
+              </div>
+              <div className="card-value">3.82%</div>
+              <div className="card-graph">
+                <svg viewBox="0 0 160 50" preserveAspectRatio="none" className="graph-svg">
+                  <defs>
+                    <linearGradient id="card-chart-grad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="var(--brand)" stopOpacity="0.35" />
+                      <stop offset="100%" stopColor="var(--brand)" stopOpacity="0.0" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    d="M 0 45 C 20 40, 40 15, 60 25 C 80 35, 100 10, 120 18 C 140 25, 150 5, 160 2"
+                    fill="none"
+                    stroke="var(--brand)"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M 0 45 C 20 40, 40 15, 60 25 C 80 35, 100 10, 120 18 C 140 25, 150 5, 160 2 L 160 50 L 0 50 Z"
+                    fill="url(#card-chart-grad)"
+                  />
+                  <circle cx="160" cy="2" r="3" fill="var(--brand)" />
+                </svg>
+              </div>
+            </div>
+            <div className="mockup-card product-card">
+              <div className="mini-product-img">
+                <svg
+                  viewBox="0 0 100 64"
+                  preserveAspectRatio="none"
+                  className="product-placeholder-svg"
+                >
+                  <rect width="100" height="64" fill="var(--surface-strong)" />
+                  <circle cx="50" cy="32" r="16" fill="var(--line)" />
+                  <path
+                    d="M 15 48 L 35 30 L 55 38 L 75 22 L 95 30 L 95 48 Z"
+                    fill="var(--surface)"
+                    opacity="0.4"
+                  />
+                </svg>
+                <span className="product-tag">{isAr ? "سلة" : "Shopify"}</span>
+              </div>
+              <div className="mini-product-info">
+                <div className="product-title">
+                  {isAr ? "كوب سيراميك يدوي" : "Handcrafted Ceramic Mug"}
+                </div>
+                <div className="product-action-row">
+                  <span className="product-price">{isAr ? "٨٩ ر.س" : "$24"}</span>
+                  <button className="buy-btn" type="button">
+                    {isAr ? "شراء سريع" : "Buy Now"}
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="mockup-kpis">
             <span>+34% CVR</span>
