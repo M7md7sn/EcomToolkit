@@ -1,70 +1,103 @@
 import fs from "fs";
 import path from "path";
 
-// On Vercel, process.env.VERCEL is defined. The project directory is read-only at runtime.
-// The only directory we can write to is "/tmp".
-const IS_SERVERLESS = !!process.env.VERCEL;
-const READ_DIR = path.join(process.cwd(), "data");
-const WRITE_DIR = IS_SERVERLESS ? "/tmp/data" : READ_DIR;
+const DATA_DIR = path.join(process.cwd(), "data");
 
-function getWritePath(filePath: string): string {
-  const fileName = path.basename(filePath);
-  return path.join(WRITE_DIR, fileName);
+// If Vercel KV env variables are linked to the project, Vercel injects these automatically
+const USE_KV = !!(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
+
+function getKvKey(filePath: string): string {
+  return path.basename(filePath, ".json");
 }
 
 /**
- * Ensures that the data directory and the target JSON file exist.
- * Reads from the read-only project folder if initializing the file for the first time.
+ * Ensures that the local data directory and the target JSON file exist (for local environment).
  */
-function ensureDataFile(filePath: string): string {
-  const targetPath = getWritePath(filePath);
-  const targetDir = path.dirname(targetPath);
-
-  if (!fs.existsSync(targetDir)) {
-    fs.mkdirSync(targetDir, { recursive: true });
+function ensureLocalDataFile(filePath: string): void {
+  if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
   }
+  if (!fs.existsSync(filePath)) {
+    fs.writeFileSync(filePath, JSON.stringify([]), "utf-8");
+  }
+}
 
-  if (!fs.existsSync(targetPath)) {
-    // If the file exists in the read-only build directory, copy it over to /tmp
-    const originalPath = path.join(READ_DIR, path.basename(filePath));
-    if (fs.existsSync(originalPath)) {
-      try {
-        fs.copyFileSync(originalPath, targetPath);
-      } catch (err) {
-        console.error(`Failed to copy database file from ${originalPath} to ${targetPath}:`, err);
-        fs.writeFileSync(targetPath, JSON.stringify([]), "utf-8");
+/**
+ * Reads a JSON list from Vercel KV (if configured) or local file.
+ */
+export async function readJsonFile<T>(filePath: string): Promise<T[]> {
+  if (USE_KV) {
+    const key = getKvKey(filePath);
+    const url = `${process.env.KV_REST_API_URL}/get/${key}`;
+    try {
+      const res = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}`,
+        },
+        cache: "no-store",
+      });
+      if (!res.ok) throw new Error(`KV response error: ${res.statusText}`);
+      const payload = await res.json();
+      const resultStr = payload.result;
+      if (!resultStr) {
+        // If the key doesn't exist in KV, load from the local source file and write it to KV
+        const localData = readLocalJsonFile<T>(filePath);
+        await writeJsonFile<T>(filePath, localData);
+        return localData;
       }
-    } else {
-      fs.writeFileSync(targetPath, JSON.stringify([]), "utf-8");
+      return JSON.parse(resultStr) as T[];
+    } catch (error) {
+      console.error(`Failed to read from Vercel KV for key ${key}, falling back to file:`, error);
+      return readLocalJsonFile<T>(filePath);
     }
+  } else {
+    return readLocalJsonFile<T>(filePath);
   }
-
-  return targetPath;
 }
 
 /**
- * Reads and parses a JSON file containing a list of items.
+ * Writes a JSON list to Vercel KV (if configured) or local file.
  */
-export function readJsonFile<T>(filePath: string): T[] {
-  const targetPath = ensureDataFile(filePath);
+export async function writeJsonFile<T>(filePath: string, items: T[]): Promise<void> {
+  if (USE_KV) {
+    const key = getKvKey(filePath);
+    const url = `${process.env.KV_REST_API_URL}/set/${key}`;
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(JSON.stringify(items)), // We store the stringified array in Redis
+      });
+      if (!res.ok) throw new Error(`KV set error: ${res.statusText}`);
+    } catch (error) {
+      console.error(`Failed to write to Vercel KV for key ${key}, falling back to file:`, error);
+      writeLocalJsonFile<T>(filePath, items);
+    }
+  } else {
+    writeLocalJsonFile<T>(filePath, items);
+  }
+}
+
+// Local filesystem helpers
+function readLocalJsonFile<T>(filePath: string): T[] {
+  ensureLocalDataFile(filePath);
   try {
-    const fileContent = fs.readFileSync(targetPath, "utf-8");
+    const fileContent = fs.readFileSync(filePath, "utf-8");
     return JSON.parse(fileContent || "[]") as T[];
   } catch (error) {
-    console.error(`Failed to read JSON file at ${targetPath}:`, error);
-    throw error;
+    console.error(`Failed to read local JSON file at ${filePath}:`, error);
+    return [];
   }
 }
 
-/**
- * Serializes and writes a list of items to a JSON file.
- */
-export function writeJsonFile<T>(filePath: string, items: T[]): void {
-  const targetPath = ensureDataFile(filePath);
+function writeLocalJsonFile<T>(filePath: string, items: T[]): void {
+  ensureLocalDataFile(filePath);
   try {
-    fs.writeFileSync(targetPath, JSON.stringify(items, null, 2), "utf-8");
+    fs.writeFileSync(filePath, JSON.stringify(items, null, 2), "utf-8");
   } catch (error) {
-    console.error(`Failed to write JSON file at ${targetPath}:`, error);
-    throw error;
+    console.error(`Failed to write local JSON file at ${filePath}:`, error);
   }
 }

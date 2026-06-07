@@ -51,7 +51,7 @@ export async function submitAuditRequest(formData: {
       return { success: false, error: "Name and Email are required." };
     }
 
-    const submissions = readJsonFile<Submission>(FILE_PATH);
+    const submissions = await readJsonFile<Submission>(FILE_PATH);
 
     const newSubmission: Submission = {
       id: Math.random().toString(36).substring(2, 11) + Date.now().toString(36),
@@ -65,7 +65,7 @@ export async function submitAuditRequest(formData: {
     };
 
     submissions.unshift(newSubmission);
-    writeJsonFile<Submission>(FILE_PATH, submissions);
+    await writeJsonFile<Submission>(FILE_PATH, submissions);
 
     return { success: true };
   } catch (error) {
@@ -115,7 +115,7 @@ export async function getSubmissions(): Promise<{
   }
 
   try {
-    const submissions = readJsonFile<Submission>(FILE_PATH);
+    const submissions = await readJsonFile<Submission>(FILE_PATH);
     return { success: true, data: submissions };
   } catch (error) {
     console.error("Failed to read submissions:", error);
@@ -133,9 +133,9 @@ export async function deleteSubmission(id: string): Promise<{ success: boolean; 
   }
 
   try {
-    const submissions = readJsonFile<Submission>(FILE_PATH);
+    const submissions = await readJsonFile<Submission>(FILE_PATH);
     const remainingSubmissions = submissions.filter((submission) => submission.id !== id);
-    writeJsonFile<Submission>(FILE_PATH, remainingSubmissions);
+    await writeJsonFile<Submission>(FILE_PATH, remainingSubmissions);
 
     return { success: true };
   } catch (error) {

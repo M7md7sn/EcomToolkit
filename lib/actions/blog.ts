@@ -26,7 +26,7 @@ export type Post = {
  */
 export async function getPosts(): Promise<{ success: boolean; data?: Post[]; error?: string }> {
   try {
-    const posts = readJsonFile<Post>(FILE_PATH);
+    const posts = await readJsonFile<Post>(FILE_PATH);
     return { success: true, data: posts };
   } catch (error) {
     console.error("Failed to read posts:", error);
@@ -41,7 +41,7 @@ export async function getPostBySlug(
   slug: string,
 ): Promise<{ success: boolean; data?: Post; error?: string }> {
   try {
-    const posts = readJsonFile<Post>(FILE_PATH);
+    const posts = await readJsonFile<Post>(FILE_PATH);
     const matchedPost = posts.find((post) => post.slug === slug);
     if (!matchedPost) {
       return { success: false, error: "Post not found." };
@@ -63,7 +63,7 @@ export async function savePost(postData: Post): Promise<{ success: boolean; erro
   }
 
   try {
-    const posts = readJsonFile<Post>(FILE_PATH);
+    const posts = await readJsonFile<Post>(FILE_PATH);
     const existingIndex = posts.findIndex((post) => post.slug === postData.slug);
     const now = new Date().toISOString();
 
@@ -85,7 +85,7 @@ export async function savePost(postData: Post): Promise<{ success: boolean; erro
     // Sort posts by creation date descending
     posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
-    writeJsonFile<Post>(FILE_PATH, posts);
+    await writeJsonFile<Post>(FILE_PATH, posts);
     return { success: true };
   } catch (error) {
     console.error("Failed to save post:", error);
@@ -103,9 +103,9 @@ export async function deletePost(slug: string): Promise<{ success: boolean; erro
   }
 
   try {
-    const posts = readJsonFile<Post>(FILE_PATH);
+    const posts = await readJsonFile<Post>(FILE_PATH);
     const remainingPosts = posts.filter((post) => post.slug !== slug);
-    writeJsonFile<Post>(FILE_PATH, remainingPosts);
+    await writeJsonFile<Post>(FILE_PATH, remainingPosts);
     return { success: true };
   } catch (error) {
     console.error("Failed to delete post:", error);
