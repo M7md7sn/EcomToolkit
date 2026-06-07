@@ -206,7 +206,7 @@ export default async function HomePage({
       <section className="section-block guide-section">
         <div className="section-heading">
           <div>
-            <span className="eyebrow">{isAr ? "محتوى يجلب زيارات" : "SEO content hub"}</span>
+            <span className="eyebrow">{isAr ? "مركز مقالات النمو" : "SEO content hub"}</span>
             <h2>{isAr ? "دليل التجارة الإلكترونية" : "Ecommerce growth guide"}</h2>
           </div>
           <Link className="text-link" href={`/${locale}/blog`}>
