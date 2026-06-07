@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Menu, Search } from "lucide-react";
 import { copy } from "@/lib/content";
 import { oppositeLocale, type Locale } from "@/lib/i18n";
@@ -7,6 +11,17 @@ import { ThemeToggle } from "./theme-toggle";
 export function SiteHeader({ locale }: { locale: Locale }) {
   const text = copy[locale];
   const nextLocale = oppositeLocale(locale);
+  const router = useRouter();
+  const [searchVal, setSearchVal] = useState("");
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchVal.trim()) {
+      router.push(`/${locale}/tools?q=${encodeURIComponent(searchVal.trim())}`);
+    } else {
+      router.push(`/${locale}/tools`);
+    }
+  };
 
   return (
     <header className="site-header">
@@ -36,13 +51,21 @@ export function SiteHeader({ locale }: { locale: Locale }) {
       </nav>
 
       <div className="header-actions">
-        <Link
-          className="header-search"
-          href={`/${locale}/tools`}
-          aria-label={text.navTools}
-        >
-          <Search size={16} />
-        </Link>
+        <form onSubmit={handleSearchSubmit} className="header-search-form">
+          <div className="header-search-wrapper">
+            <Search size={14} className="header-search-icon" />
+            <input
+              type="text"
+              className="header-search-input"
+              value={searchVal}
+              onChange={(e) => setSearchVal(e.target.value)}
+              placeholder={locale === "ar" ? "ابحث..." : "Search..."}
+            />
+            <button type="submit" className="header-search-btn-mobile" aria-label="Search">
+              <Search size={16} />
+            </button>
+          </div>
+        </form>
         <ThemeToggle />
         <Link className="locale-pill" href={`/${nextLocale}`}>
           {text.language}

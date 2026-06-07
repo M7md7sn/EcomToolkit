@@ -19,46 +19,65 @@ const fieldSets: Record<string, NumberField[]> = {
     { key: "cogs", label: { en: "Product cost", ar: "تكلفة المنتج" }, value: 35 },
     { key: "shipping", label: { en: "Shipping cost", ar: "تكلفة الشحن" }, value: 9 },
     { key: "ads", label: { en: "Ad cost", ar: "تكلفة الإعلان" }, value: 14 },
-    { key: "fees", label: { en: "Payment fee", ar: "رسوم الدفع" }, value: 3, suffix: "%" }
+    { key: "fees", label: { en: "Payment fee", ar: "رسوم الدفع" }, value: 3, suffix: "%" },
   ],
   pricing: [
     { key: "cogs", label: { en: "Total product cost", ar: "إجمالي تكلفة المنتج" }, value: 42 },
-    { key: "target", label: { en: "Target margin", ar: "الهامش المستهدف" }, value: 45, suffix: "%" },
-    { key: "fees", label: { en: "Payment fee", ar: "رسوم الدفع" }, value: 3, suffix: "%" }
+    {
+      key: "target",
+      label: { en: "Target margin", ar: "الهامش المستهدف" },
+      value: 45,
+      suffix: "%",
+    },
+    { key: "fees", label: { en: "Payment fee", ar: "رسوم الدفع" }, value: 3, suffix: "%" },
   ],
   roas: [
     { key: "revenue", label: { en: "Campaign revenue", ar: "إيراد الحملة" }, value: 5000 },
-    { key: "adSpend", label: { en: "Ad spend", ar: "الإنفاق الإعلاني" }, value: 1250 }
+    { key: "adSpend", label: { en: "Ad spend", ar: "الإنفاق الإعلاني" }, value: 1250 },
   ],
   breakEvenRoas: [
     { key: "price", label: { en: "Selling price", ar: "سعر البيع" }, value: 100 },
-    { key: "cost", label: { en: "Non-ad costs", ar: "التكاليف بدون الإعلان" }, value: 55 }
+    { key: "cost", label: { en: "Non-ad costs", ar: "التكاليف بدون الإعلان" }, value: 55 },
   ],
   discount: [
     { key: "price", label: { en: "Original price", ar: "السعر الأصلي" }, value: 120 },
     { key: "discount", label: { en: "Discount", ar: "نسبة الخصم" }, value: 20, suffix: "%" },
-    { key: "cost", label: { en: "Total cost", ar: "إجمالي التكلفة" }, value: 58 }
+    { key: "cost", label: { en: "Total cost", ar: "إجمالي التكلفة" }, value: 58 },
   ],
   shipping: [
     { key: "base", label: { en: "Base rate", ar: "السعر الأساسي" }, value: 6 },
     { key: "weight", label: { en: "Weight charge", ar: "رسوم الوزن" }, value: 4 },
     { key: "packaging", label: { en: "Packaging", ar: "التغليف" }, value: 2 },
-    { key: "cod", label: { en: "COD handling", ar: "رسوم الدفع عند الاستلام" }, value: 3 }
+    { key: "cod", label: { en: "COD handling", ar: "رسوم الدفع عند الاستلام" }, value: 3 },
   ],
   vat: [
     { key: "price", label: { en: "Product price", ar: "سعر المنتج" }, value: 100 },
-    { key: "rate", label: { en: "VAT rate", ar: "نسبة الضريبة" }, value: 15, suffix: "%" }
+    { key: "rate", label: { en: "VAT rate", ar: "نسبة الضريبة" }, value: 15, suffix: "%" },
   ],
   payment: [
     { key: "amount", label: { en: "Order amount", ar: "قيمة الطلب" }, value: 250 },
-    { key: "percent", label: { en: "Gateway percentage", ar: "نسبة البوابة" }, value: 2.9, suffix: "%" },
-    { key: "fixed", label: { en: "Fixed fee", ar: "رسوم ثابتة" }, value: 0.3 }
+    {
+      key: "percent",
+      label: { en: "Gateway percentage", ar: "نسبة البوابة" },
+      value: 2.9,
+      suffix: "%",
+    },
+    { key: "fixed", label: { en: "Fixed fee", ar: "رسوم ثابتة" }, value: 0.3 },
   ],
   cod: [
     { key: "price", label: { en: "Selling price", ar: "سعر البيع" }, value: 90 },
     { key: "cost", label: { en: "Product cost", ar: "تكلفة المنتج" }, value: 32 },
-    { key: "shipping", label: { en: "Shipping and COD", ar: "الشحن والدفع عند الاستلام" }, value: 13 },
-    { key: "failed", label: { en: "Failed delivery rate", ar: "نسبة فشل التوصيل" }, value: 8, suffix: "%" }
+    {
+      key: "shipping",
+      label: { en: "Shipping and COD", ar: "الشحن والدفع عند الاستلام" },
+      value: 13,
+    },
+    {
+      key: "failed",
+      label: { en: "Failed delivery rate", ar: "نسبة فشل التوصيل" },
+      value: 8,
+      suffix: "%",
+    },
   ],
   shopify: [
     { key: "price", label: { en: "Selling price", ar: "سعر البيع" }, value: 110 },
@@ -66,34 +85,34 @@ const fieldSets: Record<string, NumberField[]> = {
     { key: "shipping", label: { en: "Shipping", ar: "الشحن" }, value: 10 },
     { key: "apps", label: { en: "App cost per order", ar: "تكلفة التطبيقات لكل طلب" }, value: 3 },
     { key: "ads", label: { en: "Ad cost", ar: "تكلفة الإعلان" }, value: 16 },
-    { key: "fees", label: { en: "Gateway fee", ar: "رسوم الدفع" }, value: 2.9, suffix: "%" }
+    { key: "fees", label: { en: "Gateway fee", ar: "رسوم الدفع" }, value: 2.9, suffix: "%" },
   ],
   dropshipping: [
     { key: "price", label: { en: "Selling price", ar: "سعر البيع" }, value: 69 },
     { key: "supplier", label: { en: "Supplier cost", ar: "تكلفة المورد" }, value: 21 },
     { key: "shipping", label: { en: "Shipping", ar: "الشحن" }, value: 7 },
     { key: "ads", label: { en: "Ad cost", ar: "تكلفة الإعلان" }, value: 14 },
-    { key: "refund", label: { en: "Refund risk", ar: "مخاطر المرتجعات" }, value: 6, suffix: "%" }
-  ]
+    { key: "refund", label: { en: "Refund risk", ar: "مخاطر المرتجعات" }, value: 6, suffix: "%" },
+  ],
 };
 
 const textInputs = {
   description: {
     en: ["Product name", "Key benefits", "Audience"],
-    ar: ["اسم المنتج", "أهم المزايا", "الجمهور المستهدف"]
+    ar: ["اسم المنتج", "أهم المزايا", "الجمهور المستهدف"],
   },
   meta: {
     en: ["Product keyword", "Store category", "Main benefit"],
-    ar: ["الكلمة المفتاحية", "تصنيف المتجر", "الفائدة الأساسية"]
+    ar: ["الكلمة المفتاحية", "تصنيف المتجر", "الفائدة الأساسية"],
   },
   returnPolicy: {
     en: ["Store name", "Return window", "Support email"],
-    ar: ["اسم المتجر", "مدة الاسترجاع", "بريد الدعم"]
+    ar: ["اسم المتجر", "مدة الاسترجاع", "بريد الدعم"],
   },
   shippingPolicy: {
     en: ["Store name", "Delivery time", "Shipping regions"],
-    ar: ["اسم المتجر", "مدة التوصيل", "مناطق الشحن"]
-  }
+    ar: ["اسم المتجر", "مدة التوصيل", "مناطق الشحن"],
+  },
 };
 
 type CalculationResult = {
@@ -111,7 +130,7 @@ function formatMoney(amount: number): string {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-    maximumFractionDigits: 2
+    maximumFractionDigits: 2,
   }).format(amount);
 }
 
@@ -123,7 +142,7 @@ const calculatePricing: CalculatorFn = (fieldValues) => {
   return {
     display: formatMoney(price),
     secondary: `Target margin ${fieldValues.target.toFixed(1)}%`,
-    plain: `Recommended price: ${formatMoney(price)}`
+    plain: `Recommended price: ${formatMoney(price)}`,
   };
 };
 
@@ -132,7 +151,7 @@ const calculateRoas: CalculatorFn = (fieldValues) => {
   return {
     display: `${roas.toFixed(2)}x`,
     secondary: `${formatMoney(fieldValues.revenue)} revenue from ${formatMoney(fieldValues.adSpend)} ad spend`,
-    plain: `ROAS: ${roas.toFixed(2)}x`
+    plain: `ROAS: ${roas.toFixed(2)}x`,
   };
 };
 
@@ -142,7 +161,7 @@ const calculateBreakEvenRoas: CalculatorFn = (fieldValues) => {
   return {
     display: `${breakEven.toFixed(2)}x`,
     secondary: `Contribution margin ${((contribution / fieldValues.price) * 100).toFixed(1)}%`,
-    plain: `Break-even ROAS: ${breakEven.toFixed(2)}x`
+    plain: `Break-even ROAS: ${breakEven.toFixed(2)}x`,
   };
 };
 
@@ -152,7 +171,7 @@ const calculateDiscount: CalculatorFn = (fieldValues) => {
   return {
     display: formatMoney(profit),
     secondary: `Sale price ${formatMoney(salePrice)}`,
-    plain: `Profit after discount: ${formatMoney(profit)}`
+    plain: `Profit after discount: ${formatMoney(profit)}`,
   };
 };
 
@@ -161,7 +180,7 @@ const calculateShipping: CalculatorFn = (fieldValues) => {
   return {
     display: formatMoney(cost),
     secondary: "Base + weight + packaging + COD handling",
-    plain: `Estimated shipping cost: ${formatMoney(cost)}`
+    plain: `Estimated shipping cost: ${formatMoney(cost)}`,
   };
 };
 
@@ -170,7 +189,7 @@ const calculateVat: CalculatorFn = (fieldValues) => {
   return {
     display: formatMoney(vat),
     secondary: `Gross price ${formatMoney(fieldValues.price + vat)}`,
-    plain: `VAT amount: ${formatMoney(vat)}`
+    plain: `VAT amount: ${formatMoney(vat)}`,
   };
 };
 
@@ -179,7 +198,7 @@ const calculatePayment: CalculatorFn = (fieldValues) => {
   return {
     display: formatMoney(fee),
     secondary: `Net payout ${formatMoney(fieldValues.amount - fee)}`,
-    plain: `Gateway fee: ${formatMoney(fee)}`
+    plain: `Gateway fee: ${formatMoney(fee)}`,
   };
 };
 
@@ -189,39 +208,55 @@ const calculateCod: CalculatorFn = (fieldValues) => {
   return {
     display: formatMoney(profit),
     secondary: `Failed delivery cost reserve ${formatMoney(failedDeliveryCost)}`,
-    plain: `COD net profit: ${formatMoney(profit)}`
+    plain: `COD net profit: ${formatMoney(profit)}`,
   };
 };
 
 const calculateShopify: CalculatorFn = (fieldValues) => {
   const fee = fieldValues.price * (fieldValues.fees / 100);
-  const profit = fieldValues.price - fieldValues.cost - fieldValues.shipping - fieldValues.apps - fieldValues.ads - fee;
+  const profit =
+    fieldValues.price -
+    fieldValues.cost -
+    fieldValues.shipping -
+    fieldValues.apps -
+    fieldValues.ads -
+    fee;
   const margin = fieldValues.price ? (profit / fieldValues.price) * 100 : 0;
   return {
     display: formatMoney(profit),
     secondary: `Margin ${margin.toFixed(1)}% after Shopify costs`,
-    plain: `Shopify profit: ${formatMoney(profit)}`
+    plain: `Shopify profit: ${formatMoney(profit)}`,
   };
 };
 
 const calculateDropshipping: CalculatorFn = (fieldValues) => {
   const refundReserve = fieldValues.price * (fieldValues.refund / 100);
-  const profit = fieldValues.price - fieldValues.supplier - fieldValues.shipping - fieldValues.ads - refundReserve;
+  const profit =
+    fieldValues.price -
+    fieldValues.supplier -
+    fieldValues.shipping -
+    fieldValues.ads -
+    refundReserve;
   return {
     display: formatMoney(profit),
     secondary: `Refund reserve ${formatMoney(refundReserve)}`,
-    plain: `Dropshipping profit: ${formatMoney(profit)}`
+    plain: `Dropshipping profit: ${formatMoney(profit)}`,
   };
 };
 
 const calculateProfit: CalculatorFn = (fieldValues) => {
   const fee = fieldValues.price * ((fieldValues.fees || 0) / 100);
-  const profit = fieldValues.price - (fieldValues.cogs || 0) - (fieldValues.shipping || 0) - (fieldValues.ads || 0) - fee;
+  const profit =
+    fieldValues.price -
+    (fieldValues.cogs || 0) -
+    (fieldValues.shipping || 0) -
+    (fieldValues.ads || 0) -
+    fee;
   const margin = fieldValues.price ? (profit / fieldValues.price) * 100 : 0;
   return {
     display: formatMoney(profit),
     secondary: `Margin ${margin.toFixed(1)}%`,
-    plain: `Net profit: ${formatMoney(profit)}`
+    plain: `Net profit: ${formatMoney(profit)}`,
   };
 };
 
@@ -236,7 +271,7 @@ const CALCULATORS: Record<string, CalculatorFn> = {
   cod: calculateCod,
   shopify: calculateShopify,
   dropshipping: calculateDropshipping,
-  profit: calculateProfit
+  profit: calculateProfit,
 };
 
 /**
@@ -261,7 +296,7 @@ const generateMeta: GeneratorFn = (locale, inputs) => {
   return {
     display: `${title}\n\n${description}`,
     secondary: "",
-    plain: `${title}\n${description}`
+    plain: `${title}\n${description}`,
   };
 };
 
@@ -296,7 +331,7 @@ const GENERATORS: Record<string, GeneratorFn> = {
   meta: generateMeta,
   returnPolicy: generateReturnPolicy,
   shippingPolicy: generateShippingPolicy,
-  description: generateProductDescription
+  description: generateProductDescription,
 };
 
 /**
@@ -309,7 +344,7 @@ function generateText(type: string, locale: Locale, inputs: string[]): Calculati
 
 export function ToolRunner({
   tool,
-  locale
+  locale,
 }: {
   tool: {
     type: ToolType;
@@ -322,13 +357,11 @@ export function ToolRunner({
   const translations = copy[locale];
   const isArabic = locale === "ar";
   const numericFields = fieldSets[tool.type] || fieldSets.profit;
-  const isGenerator = ["description", "meta", "returnPolicy", "shippingPolicy"].includes(
-    tool.type
-  );
+  const isGenerator = ["description", "meta", "returnPolicy", "shippingPolicy"].includes(tool.type);
 
   // Form Value States
   const [values, setValues] = useState(
-    Object.fromEntries(numericFields.map((field) => [field.key, field.value]))
+    Object.fromEntries(numericFields.map((field) => [field.key, field.value])),
   );
   const [textValues, setTextValues] = useState<string[]>([]);
   const [copied, setCopied] = useState(false);
@@ -346,25 +379,41 @@ export function ToolRunner({
     setMissingApiKey(false);
 
     if (tool.type === "meta") {
-      setTextValues(isArabic
-        ? ["حقيبة ذكية", "حقيبة ظهر مقاومة للماء مع شاحن USB", "المسافرين وأصحاب الأعمال"]
-        : ["Smart backpack", "waterproof laptop backpack with USB port", "commuters and travelers"]
+      setTextValues(
+        isArabic
+          ? ["حقيبة ذكية", "حقيبة ظهر مقاومة للماء مع شاحن USB", "المسافرين وأصحاب الأعمال"]
+          : [
+              "Smart backpack",
+              "waterproof laptop backpack with USB port",
+              "commuters and travelers",
+            ],
       );
     } else if (tool.type === "returnPolicy") {
-      setTextValues(isArabic
-        ? ["متجر الأناقة", "14 يوماً", "support@alanaqastore.com"]
-        : ["Elegance Store", "30 days", "returns@elegancestore.com"]
+      setTextValues(
+        isArabic
+          ? ["متجر الأناقة", "14 يوماً", "support@alanaqastore.com"]
+          : ["Elegance Store", "30 days", "returns@elegancestore.com"],
       );
     } else if (tool.type === "shippingPolicy") {
-      setTextValues(isArabic
-        ? ["متجر الأناقة", "3 - 5 أيام عمل", "جميع مدن المملكة العربية السعودية ومصر"]
-        : ["Elegance Store", "2-4 business days", "United States and Canada"]
+      setTextValues(
+        isArabic
+          ? ["متجر الأناقة", "3 - 5 أيام عمل", "جميع مدن المملكة العربية السعودية ومصر"]
+          : ["Elegance Store", "2-4 business days", "United States and Canada"],
       );
     } else {
       // description
-      setTextValues(isArabic
-        ? ["حقيبة ظهر ذكية", "متينة، خفيفة الوزن، منظمة بشكل ممتاز، مع منفذ شحن USB", "المتسوقين عبر الإنترنت والطلاب والمسافرين"]
-        : ["Smart backpack", "durable, lightweight, well-organized with USB charging port", "busy online shoppers, students, and travelers"]
+      setTextValues(
+        isArabic
+          ? [
+              "حقيبة ظهر ذكية",
+              "متينة، خفيفة الوزن، منظمة بشكل ممتاز، مع منفذ شحن USB",
+              "المتسوقين عبر الإنترنت والطلاب والمسافرين",
+            ]
+          : [
+              "Smart backpack",
+              "durable, lightweight, well-organized with USB charging port",
+              "busy online shoppers, students, and travelers",
+            ],
       );
     }
   }, [tool.type, locale, isArabic]);
@@ -395,10 +444,14 @@ export function ToolRunner({
       } else {
         setAiError(aiCopyResponse.error || "Failed to generate AI copywriting.");
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error(error);
-      const errMsg = error?.message || String(error);
-      setAiError(isArabic ? `فشل الاتصال بالذكاء الاصطناعي: ${errMsg}` : `Failed to connect to AI server: ${errMsg}`);
+      const errMsg = error instanceof Error ? error.message : String(error);
+      setAiError(
+        isArabic
+          ? `فشل الاتصال بالذكاء الاصطناعي: ${errMsg}`
+          : `Failed to connect to AI server: ${errMsg}`,
+      );
     } finally {
       setIsGenerating(false);
     }
@@ -439,7 +492,7 @@ export function ToolRunner({
                     }}
                   />
                 </label>
-              )
+              ),
             )}
 
             {/* AI Action Button */}

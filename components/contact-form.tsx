@@ -27,7 +27,11 @@ export function ContactForm({ locale }: { locale: Locale }) {
     setError("");
 
     if (!name.trim() || !email.trim()) {
-      setError(isAr ? "يرجى ملء الحقول المطلوبة (الاسم والبريد الإلكتروني)." : "Please fill in required fields (Name and Email).");
+      setError(
+        isAr
+          ? "يرجى ملء الحقول المطلوبة (الاسم والبريد الإلكتروني)."
+          : "Please fill in required fields (Name and Email).",
+      );
       return;
     }
 
@@ -45,7 +49,12 @@ export function ContactForm({ locale }: { locale: Locale }) {
       if (res.success) {
         setSuccess(true);
       } else {
-        setError(res.error || (isAr ? "حدث خطأ ما. يرجى المحاولة مرة أخرى." : "Something went wrong. Please try again."));
+        setError(
+          res.error ||
+            (isAr
+              ? "حدث خطأ ما. يرجى المحاولة مرة أخرى."
+              : "Something went wrong. Please try again."),
+        );
       }
     } catch (err) {
       console.error(err);
@@ -68,7 +77,9 @@ export function ContactForm({ locale }: { locale: Locale }) {
           <Link href={`/${locale}`} className="primary-button">
             {!isAr && <ArrowLeft size={16} style={{ marginRight: "8px" }} />}
             {t.backHome}
-            {isAr && <ArrowLeft size={16} style={{ marginLeft: "8px", transform: "rotate(180deg)" }} />}
+            {isAr && (
+              <ArrowLeft size={16} style={{ marginLeft: "8px", transform: "rotate(180deg)" }} />
+            )}
           </Link>
         </div>
         <div className="success-glow" />

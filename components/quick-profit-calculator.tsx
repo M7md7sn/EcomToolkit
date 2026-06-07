@@ -19,7 +19,7 @@ const fieldLabels = {
     fees: "Gateway fee %",
     profit: "Net profit",
     margin: "Margin",
-    roi: "ROI"
+    roi: "ROI",
   },
   ar: {
     selling: "سعر البيع",
@@ -29,8 +29,8 @@ const fieldLabels = {
     fees: "رسوم الدفع %",
     profit: "صافي الربح",
     margin: "الهامش",
-    roi: "العائد"
-  }
+    roi: "العائد",
+  },
 };
 
 /**
@@ -40,7 +40,7 @@ function formatMoney(amount: number): string {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-    maximumFractionDigits: 2
+    maximumFractionDigits: 2,
   }).format(amount);
 }
 
@@ -51,19 +51,22 @@ export function QuickProfitCalculator({ locale }: { locale: Locale }) {
     { key: "product", label: labels.product, value: 28 },
     { key: "shipping", label: labels.shipping, value: 8 },
     { key: "ads", label: labels.ads, value: 12 },
-    { key: "fees", label: labels.fees, value: 3 }
+    { key: "fees", label: labels.fees, value: 3 },
   ]);
 
   const profitAnalysis = useMemo(() => {
     const fieldValueMap = Object.fromEntries(fields.map((field) => [field.key, field.value]));
-    const gatewayFeeAmount = Number(fieldValueMap.selling || 0) * (Number(fieldValueMap.fees || 0) / 100);
+    const gatewayFeeAmount =
+      Number(fieldValueMap.selling || 0) * (Number(fieldValueMap.fees || 0) / 100);
     const totalOrderCost =
       Number(fieldValueMap.product || 0) +
       Number(fieldValueMap.shipping || 0) +
       Number(fieldValueMap.ads || 0) +
       gatewayFeeAmount;
     const netProfitAmount = Number(fieldValueMap.selling || 0) - totalOrderCost;
-    const marginPercentage = Number(fieldValueMap.selling) ? (netProfitAmount / Number(fieldValueMap.selling)) * 100 : 0;
+    const marginPercentage = Number(fieldValueMap.selling)
+      ? (netProfitAmount / Number(fieldValueMap.selling)) * 100
+      : 0;
     const roiPercentage = totalOrderCost ? (netProfitAmount / totalOrderCost) * 100 : 0;
 
     return { profit: netProfitAmount, margin: marginPercentage, roi: roiPercentage };
@@ -82,8 +85,8 @@ export function QuickProfitCalculator({ locale }: { locale: Locale }) {
   function updateValue(key: string, inputValueString: string) {
     setFields((prevFields) =>
       prevFields.map((field) =>
-        field.key === key ? { ...field, value: Number(inputValueString) } : field
-      )
+        field.key === key ? { ...field, value: Number(inputValueString) } : field,
+      ),
     );
   }
 

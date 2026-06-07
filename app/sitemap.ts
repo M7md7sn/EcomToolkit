@@ -14,7 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: route === "" ? 1.0 : 0.8,
-    }))
+    })),
   );
 
   // Generate dynamic tools sitemaps for both locales
@@ -24,7 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.9,
-    }))
+    })),
   );
 
   // Generate dynamic blog posts sitemaps for both locales
@@ -38,7 +38,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           lastModified: new Date(post.updatedAt || post.createdAt),
           changeFrequency: "monthly" as const,
           priority: 0.7,
-        }))
+        })),
       );
     }
   } catch (error) {

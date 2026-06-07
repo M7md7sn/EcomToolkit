@@ -37,7 +37,9 @@ export async function getPosts(): Promise<{ success: boolean; data?: Post[]; err
 /**
  * Action: Get single post by slug
  */
-export async function getPostBySlug(slug: string): Promise<{ success: boolean; data?: Post; error?: string }> {
+export async function getPostBySlug(
+  slug: string,
+): Promise<{ success: boolean; data?: Post; error?: string }> {
   try {
     const posts = readJsonFile<Post>(FILE_PATH);
     const matchedPost = posts.find((post) => post.slug === slug);

@@ -9,12 +9,12 @@ import Link from "next/link";
 export function generateStaticParams() {
   return tools.flatMap((tool) => [
     { locale: "en", slug: tool.slug },
-    { locale: "ar", slug: tool.slug }
+    { locale: "ar", slug: tool.slug },
   ]);
 }
 
 export async function generateMetadata({
-  params
+  params,
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }) {
@@ -33,14 +33,14 @@ export async function generateMetadata({
       canonical: `/${current}/tools/${tool.slug}`,
       languages: {
         en: `/en/tools/${tool.slug}`,
-        ar: `/ar/tools/${tool.slug}`
-      }
-    }
+        ar: `/ar/tools/${tool.slug}`,
+      },
+    },
   };
 }
 
 export default async function ToolPage({
-  params
+  params,
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }) {
@@ -62,9 +62,7 @@ export default async function ToolPage({
         {/* Sticky Left Sidebar for Quick Switch */}
         <aside className="tool-sidebar" aria-label="Tools navigation">
           <div className="sidebar-scroll">
-            <h3 className="sidebar-group-title">
-              {isAr ? "جميع الأدوات" : "All Tools"}
-            </h3>
+            <h3 className="sidebar-group-title">{isAr ? "جميع الأدوات" : "All Tools"}</h3>
             {categories.map((category) => {
               const categoryTools = tools.filter((tItem) => tItem.category === category.slug);
               const CatIcon = category.icon;
@@ -112,7 +110,7 @@ export default async function ToolPage({
               type: tool.type,
               priority: tool.priority,
               title: tool.title,
-              resultLabel: tool.resultLabel
+              resultLabel: tool.resultLabel,
             }}
             locale={locale}
           />
@@ -150,7 +148,9 @@ export default async function ToolPage({
               <div className="section-heading">
                 <div>
                   <span className="eyebrow">{t.related}</span>
-                  <h2>{locale === "ar" ? "أدوات تكمل نفس القرار" : "Tools for the same decision"}</h2>
+                  <h2>
+                    {locale === "ar" ? "أدوات تكمل نفس القرار" : "Tools for the same decision"}
+                  </h2>
                 </div>
               </div>
               <div className="tools-grid">

@@ -104,7 +104,11 @@ export async function logoutAdmin() {
 /**
  * Action: Fetch Submissions (Admin Only)
  */
-export async function getSubmissions(): Promise<{ success: boolean; data?: Submission[]; error?: string }> {
+export async function getSubmissions(): Promise<{
+  success: boolean;
+  data?: Submission[];
+  error?: string;
+}> {
   const isAdminLoggedIn = await isAuthenticated();
   if (!isAdminLoggedIn) {
     return { success: false, error: "Unauthorized access." };
@@ -132,7 +136,7 @@ export async function deleteSubmission(id: string): Promise<{ success: boolean; 
     const submissions = readJsonFile<Submission>(FILE_PATH);
     const remainingSubmissions = submissions.filter((submission) => submission.id !== id);
     writeJsonFile<Submission>(FILE_PATH, remainingSubmissions);
-    
+
     return { success: true };
   } catch (error) {
     console.error("Failed to delete submission:", error);

@@ -11,7 +11,7 @@ import {
   Search,
   ShieldCheck,
   ShoppingCart,
-  Truck
+  Truck,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { Locale } from "./i18n";
@@ -53,73 +53,73 @@ export const categories = [
     icon: Calculator,
     title: {
       en: "Profit & Pricing",
-      ar: "الربح والتسعير"
+      ar: "الربح والتسعير",
     },
     summary: {
       en: "Price products, protect margins, and understand real profit after fees.",
-      ar: "سعر المنتجات واحم هامش الربح وافهم الربح الحقيقي بعد الرسوم."
-    }
+      ar: "سعر المنتجات واحم هامش الربح وافهم الربح الحقيقي بعد الرسوم.",
+    },
   },
   {
     slug: "marketing",
     icon: LineChart,
     title: {
       en: "Marketing",
-      ar: "التسويق"
+      ar: "التسويق",
     },
     summary: {
       en: "Plan ad spend, ROAS, CAC, conversion rates, and campaign economics.",
-      ar: "خطط للإنفاق الإعلاني والعائد وتكلفة العميل واقتصاديات الحملات."
-    }
+      ar: "خطط للإنفاق الإعلاني والعائد وتكلفة العميل واقتصاديات الحملات.",
+    },
   },
   {
     slug: "product-content",
     icon: Bot,
     title: {
       en: "Product Content",
-      ar: "محتوى المنتجات"
+      ar: "محتوى المنتجات",
     },
     summary: {
       en: "Generate product descriptions, SEO titles, metadata, and marketplace copy.",
-      ar: "أنشئ أوصاف المنتجات وعناوين SEO والبيانات الوصفية ونصوص المتاجر."
-    }
+      ar: "أنشئ أوصاف المنتجات وعناوين SEO والبيانات الوصفية ونصوص المتاجر.",
+    },
   },
   {
     slug: "store-policies",
     icon: ShieldCheck,
     title: {
       en: "Store Policies",
-      ar: "سياسات المتجر"
+      ar: "سياسات المتجر",
     },
     summary: {
       en: "Create return, shipping, privacy, and terms templates for ecommerce stores.",
-      ar: "أنشئ قوالب سياسات الإرجاع والشحن والخصوصية وشروط المتجر."
-    }
+      ar: "أنشئ قوالب سياسات الإرجاع والشحن والخصوصية وشروط المتجر.",
+    },
   },
   {
     slug: "shipping-logistics",
     icon: Truck,
     title: {
       en: "Shipping & Logistics",
-      ar: "الشحن واللوجستيات"
+      ar: "الشحن واللوجستيات",
     },
     summary: {
       en: "Estimate delivery costs, volumetric weight, COD risk, and free shipping thresholds.",
-      ar: "قدر تكاليف التوصيل والوزن الحجمي ومخاطر الدفع عند الاستلام وحد الشحن المجاني."
-    }
+      ar: "قدر تكاليف التوصيل والوزن الحجمي ومخاطر الدفع عند الاستلام وحد الشحن المجاني.",
+    },
   },
   {
     slug: "finance",
     icon: Receipt,
     title: {
       en: "Finance",
-      ar: "الحسابات المالية"
+      ar: "الحسابات المالية",
     },
     summary: {
       en: "Calculate taxes, payment fees, cash flow, break-even points, and forecasts.",
-      ar: "احسب الضرائب ورسوم الدفع والتدفق النقدي ونقاط التعادل والتوقعات."
-    }
-  }
+      ar: "احسب الضرائب ورسوم الدفع والتدفق النقدي ونقاط التعادل والتوقعات.",
+    },
+  },
 ];
 
 export const tools: Tool[] = [
@@ -134,16 +134,16 @@ export const tools: Tool[] = [
     score: 98,
     title: {
       en: "Ecommerce Profit Margin Calculator",
-      ar: "حاسبة هامش ربح المتجر الإلكتروني"
+      ar: "حاسبة هامش ربح المتجر الإلكتروني",
     },
     summary: {
       en: "Calculate net profit, margin, ROI, and cost ratios after product, shipping, ads, and fees.",
-      ar: "احسب صافي الربح والهامش والعائد بعد تكلفة المنتج والشحن والإعلانات والرسوم."
+      ar: "احسب صافي الربح والهامش والعائد بعد تكلفة المنتج والشحن والإعلانات والرسوم.",
     },
     resultLabel: {
       en: "Net profit per order",
-      ar: "صافي الربح لكل طلب"
-    }
+      ar: "صافي الربح لكل طلب",
+    },
   },
   {
     slug: "product-pricing-calculator",
@@ -156,16 +156,16 @@ export const tools: Tool[] = [
     score: 96,
     title: {
       en: "Product Pricing Calculator",
-      ar: "حاسبة تسعير المنتجات"
+      ar: "حاسبة تسعير المنتجات",
     },
     summary: {
       en: "Find the selling price needed to hit a target profit margin.",
-      ar: "اعرف سعر البيع المطلوب للوصول إلى هامش الربح المستهدف."
+      ar: "اعرف سعر البيع المطلوب للوصول إلى هامش الربح المستهدف.",
     },
     resultLabel: {
       en: "Recommended price",
-      ar: "سعر البيع المقترح"
-    }
+      ar: "سعر البيع المقترح",
+    },
   },
   {
     slug: "shopify-profit-calculator",
@@ -178,16 +178,16 @@ export const tools: Tool[] = [
     score: 95,
     title: {
       en: "Shopify Profit Calculator",
-      ar: "حاسبة أرباح Shopify"
+      ar: "حاسبة أرباح Shopify",
     },
     summary: {
       en: "Model Shopify profit after gateway fees, app costs, shipping, returns, and ads.",
-      ar: "احسب ربح Shopify بعد رسوم الدفع والتطبيقات والشحن والمرتجعات والإعلانات."
+      ar: "احسب ربح Shopify بعد رسوم الدفع والتطبيقات والشحن والمرتجعات والإعلانات.",
     },
     resultLabel: {
       en: "Estimated Shopify profit",
-      ar: "الربح المتوقع من Shopify"
-    }
+      ar: "الربح المتوقع من Shopify",
+    },
   },
   {
     slug: "dropshipping-profit-calculator",
@@ -200,16 +200,16 @@ export const tools: Tool[] = [
     score: 94,
     title: {
       en: "Dropshipping Profit Calculator",
-      ar: "حاسبة أرباح الدروبشيبينغ"
+      ar: "حاسبة أرباح الدروبشيبينغ",
     },
     summary: {
       en: "Check whether a dropshipping product can survive supplier cost, shipping, ads, and refunds.",
-      ar: "اختبر قدرة منتج الدروبشيبينغ على تحمل تكلفة المورد والشحن والإعلانات والمرتجعات."
+      ar: "اختبر قدرة منتج الدروبشيبينغ على تحمل تكلفة المورد والشحن والإعلانات والمرتجعات.",
     },
     resultLabel: {
       en: "Dropshipping net profit",
-      ar: "صافي ربح الدروبشيبينغ"
-    }
+      ar: "صافي ربح الدروبشيبينغ",
+    },
   },
   {
     slug: "roas-calculator",
@@ -222,16 +222,16 @@ export const tools: Tool[] = [
     score: 93,
     title: {
       en: "ROAS Calculator",
-      ar: "حاسبة العائد على الإنفاق الإعلاني"
+      ar: "حاسبة العائد على الإنفاق الإعلاني",
     },
     summary: {
       en: "Calculate return on ad spend and understand campaign revenue efficiency.",
-      ar: "احسب العائد على الإنفاق الإعلاني وافهم كفاءة إيرادات الحملات."
+      ar: "احسب العائد على الإنفاق الإعلاني وافهم كفاءة إيرادات الحملات.",
     },
     resultLabel: {
       en: "ROAS",
-      ar: "العائد الإعلاني"
-    }
+      ar: "العائد الإعلاني",
+    },
   },
   {
     slug: "break-even-roas-calculator",
@@ -244,16 +244,16 @@ export const tools: Tool[] = [
     score: 92,
     title: {
       en: "Break-Even ROAS Calculator",
-      ar: "حاسبة ROAS نقطة التعادل"
+      ar: "حاسبة ROAS نقطة التعادل",
     },
     summary: {
       en: "Find the minimum ROAS needed before ads start producing profit.",
-      ar: "اعرف أقل عائد إعلاني مطلوب قبل أن تبدأ الإعلانات بتحقيق الربح."
+      ar: "اعرف أقل عائد إعلاني مطلوب قبل أن تبدأ الإعلانات بتحقيق الربح.",
     },
     resultLabel: {
       en: "Break-even ROAS",
-      ar: "ROAS نقطة التعادل"
-    }
+      ar: "ROAS نقطة التعادل",
+    },
   },
   {
     slug: "discount-profit-impact-calculator",
@@ -266,16 +266,16 @@ export const tools: Tool[] = [
     score: 91,
     title: {
       en: "Discount Profit Impact Calculator",
-      ar: "حاسبة تأثير الخصم على الربح"
+      ar: "حاسبة تأثير الخصم على الربح",
     },
     summary: {
       en: "See how discounts change margin, profit, and required sales volume.",
-      ar: "اعرف كيف يغير الخصم هامش الربح وصافي الربح وحجم المبيعات المطلوب."
+      ar: "اعرف كيف يغير الخصم هامش الربح وصافي الربح وحجم المبيعات المطلوب.",
     },
     resultLabel: {
       en: "Profit after discount",
-      ar: "الربح بعد الخصم"
-    }
+      ar: "الربح بعد الخصم",
+    },
   },
   {
     slug: "shipping-cost-calculator",
@@ -288,16 +288,16 @@ export const tools: Tool[] = [
     score: 90,
     title: {
       en: "Shipping Cost Calculator",
-      ar: "حاسبة تكلفة الشحن"
+      ar: "حاسبة تكلفة الشحن",
     },
     summary: {
       en: "Estimate shipping cost from base rate, weight, distance, packaging, and COD handling.",
-      ar: "قدر تكلفة الشحن من السعر الأساسي والوزن والمسافة والتغليف ورسوم الدفع عند الاستلام."
+      ar: "قدر تكلفة الشحن من السعر الأساسي والوزن والمسافة والتغليف ورسوم الدفع عند الاستلام.",
     },
     resultLabel: {
       en: "Estimated shipping cost",
-      ar: "تكلفة الشحن المتوقعة"
-    }
+      ar: "تكلفة الشحن المتوقعة",
+    },
   },
   {
     slug: "ecommerce-vat-calculator",
@@ -310,16 +310,16 @@ export const tools: Tool[] = [
     score: 89,
     title: {
       en: "Ecommerce VAT Calculator",
-      ar: "حاسبة ضريبة القيمة المضافة للتجارة الإلكترونية"
+      ar: "حاسبة ضريبة القيمة المضافة للتجارة الإلكترونية",
     },
     summary: {
       en: "Add or remove VAT from product prices for ecommerce orders.",
-      ar: "أضف أو اطرح ضريبة القيمة المضافة من أسعار منتجات المتجر."
+      ar: "أضف أو اطرح ضريبة القيمة المضافة من أسعار منتجات المتجر.",
     },
     resultLabel: {
       en: "VAT amount",
-      ar: "قيمة الضريبة"
-    }
+      ar: "قيمة الضريبة",
+    },
   },
   {
     slug: "payment-gateway-fee-calculator",
@@ -332,16 +332,16 @@ export const tools: Tool[] = [
     score: 88,
     title: {
       en: "Payment Gateway Fee Calculator",
-      ar: "حاسبة رسوم بوابات الدفع"
+      ar: "حاسبة رسوم بوابات الدفع",
     },
     summary: {
       en: "Estimate card, wallet, PayPal, Stripe, or regional gateway fees.",
-      ar: "قدر رسوم البطاقات والمحافظ وPayPal وStripe وبوابات الدفع المحلية."
+      ar: "قدر رسوم البطاقات والمحافظ وPayPal وStripe وبوابات الدفع المحلية.",
     },
     resultLabel: {
       en: "Gateway fee",
-      ar: "رسوم بوابة الدفع"
-    }
+      ar: "رسوم بوابة الدفع",
+    },
   },
   {
     slug: "product-description-generator",
@@ -354,16 +354,16 @@ export const tools: Tool[] = [
     score: 87,
     title: {
       en: "Product Description Generator",
-      ar: "مولد وصف المنتجات"
+      ar: "مولد وصف المنتجات",
     },
     summary: {
       en: "Generate polished ecommerce product copy in English or Arabic.",
-      ar: "أنشئ وصفًا احترافيًا للمنتجات بالعربية أو الإنجليزية."
+      ar: "أنشئ وصفًا احترافيًا للمنتجات بالعربية أو الإنجليزية.",
     },
     resultLabel: {
       en: "Generated description",
-      ar: "الوصف الناتج"
-    }
+      ar: "الوصف الناتج",
+    },
   },
   {
     slug: "seo-title-meta-generator",
@@ -376,16 +376,16 @@ export const tools: Tool[] = [
     score: 86,
     title: {
       en: "SEO Title & Meta Generator",
-      ar: "مولد عنوان SEO والوصف التعريفي"
+      ar: "مولد عنوان SEO والوصف التعريفي",
     },
     summary: {
       en: "Create search-friendly product titles and meta descriptions.",
-      ar: "أنشئ عناوين منتجات وأوصافًا تعريفية مناسبة لمحركات البحث."
+      ar: "أنشئ عناوين منتجات وأوصافًا تعريفية مناسبة لمحركات البحث.",
     },
     resultLabel: {
       en: "SEO snippet",
-      ar: "مقتطف SEO"
-    }
+      ar: "مقتطف SEO",
+    },
   },
   {
     slug: "return-policy-generator",
@@ -398,16 +398,16 @@ export const tools: Tool[] = [
     score: 85,
     title: {
       en: "Return Policy Generator",
-      ar: "مولد سياسة الاسترجاع والاستبدال"
+      ar: "مولد سياسة الاسترجاع والاستبدال",
     },
     summary: {
       en: "Draft a clear ecommerce return and exchange policy.",
-      ar: "أنشئ مسودة واضحة لسياسة الاسترجاع والاستبدال لمتجرك."
+      ar: "أنشئ مسودة واضحة لسياسة الاسترجاع والاستبدال لمتجرك.",
     },
     resultLabel: {
       en: "Policy draft",
-      ar: "مسودة السياسة"
-    }
+      ar: "مسودة السياسة",
+    },
   },
   {
     slug: "shipping-policy-generator",
@@ -420,16 +420,16 @@ export const tools: Tool[] = [
     score: 84,
     title: {
       en: "Shipping Policy Generator",
-      ar: "مولد سياسة الشحن"
+      ar: "مولد سياسة الشحن",
     },
     summary: {
       en: "Create a store shipping policy with delivery windows, fees, and COD notes.",
-      ar: "أنشئ سياسة شحن تشمل مدة التوصيل والرسوم وملاحظات الدفع عند الاستلام."
+      ar: "أنشئ سياسة شحن تشمل مدة التوصيل والرسوم وملاحظات الدفع عند الاستلام.",
     },
     resultLabel: {
       en: "Shipping policy draft",
-      ar: "مسودة سياسة الشحن"
-    }
+      ar: "مسودة سياسة الشحن",
+    },
   },
   {
     slug: "cod-profit-calculator",
@@ -442,17 +442,17 @@ export const tools: Tool[] = [
     score: 83,
     title: {
       en: "COD Profit Calculator",
-      ar: "حاسبة ربح الدفع عند الاستلام"
+      ar: "حاسبة ربح الدفع عند الاستلام",
     },
     summary: {
       en: "Calculate true profit after COD fees, failed delivery, returns, and shipping.",
-      ar: "احسب الربح الحقيقي بعد رسوم الدفع عند الاستلام وفشل التوصيل والمرتجعات والشحن."
+      ar: "احسب الربح الحقيقي بعد رسوم الدفع عند الاستلام وفشل التوصيل والمرتجعات والشحن.",
     },
     resultLabel: {
       en: "COD net profit",
-      ar: "صافي ربح الدفع عند الاستلام"
-    }
-  }
+      ar: "صافي ربح الدفع عند الاستلام",
+    },
+  },
 ];
 
 export const copy = {
@@ -488,7 +488,7 @@ export const copy = {
     instantResult: "Instant result",
     copied: "Copied",
     copyResult: "Copy result",
-    
+
     // Contact & Audit Form
     phone: "Phone number",
     phonePlaceholder: "+1 (555) 000-0000",
@@ -501,13 +501,14 @@ export const copy = {
     submitForm: "Send audit request",
     submitting: "Submitting...",
     successTitle: "Audit Request Received!",
-    successText: "Thank you! We have received your request and our team will analyze your store. We'll get back to you within 48 hours.",
+    successText:
+      "Thank you! We have received your request and our team will analyze your store. We'll get back to you within 48 hours.",
     backHome: "Back to homepage",
     nameLabel: "Name",
     namePlaceholder: "Your full name",
     emailLabel: "Email address",
     emailFieldPlaceholder: "you@store.com",
-    
+
     // Platforms
     platformShopify: "Shopify",
     platformSalla: "Salla (سلة)",
@@ -571,8 +572,9 @@ export const copy = {
     category: "Category",
     btnGenerateAi: "Generate with Gemini AI",
     writingAi: "Gemini is writing...",
-    errMissingKey: "Gemini API key is not configured. Add GEMINI_API_KEY to .env.local to activate real AI generation.",
-    templatePreview: "Template preview (non-AI fallback)"
+    errMissingKey:
+      "Gemini API key is not configured. Add GEMINI_API_KEY to .env.local to activate real AI generation.",
+    templatePreview: "Template preview (non-AI fallback)",
   },
   ar: {
     brand: "تاجر تولز",
@@ -590,15 +592,13 @@ export const copy = {
     popular: "مسارات عمل شائعة",
     blog: "ملاحظات نمو حديثة",
     newsletter: "احصل على أحدث أدوات التجارة الإلكترونية",
-    newsletterText:
-      "رسالة عملية عند نشر حاسبات جديدة أو قوالب عربية أو أدلة ربحية.",
+    newsletterText: "رسالة عملية عند نشر حاسبات جديدة أو قوالب عربية أو أدلة ربحية.",
     emailPlaceholder: "you@store.com",
     subscribe: "اشترك",
     useTool: "استخدم الأداة",
     allTools: "كل الأدوات",
     leadCta: "هل تحتاج إلى بناء متجر إلكتروني؟",
-    leadText:
-      "عوّل نفس الحسابات إلى متجر Shopify أو WooCommerce أو Salla أو متجر مخصص جاهز للنمو.",
+    leadText: "عوّل نفس الحسابات إلى متجر Shopify أو WooCommerce أو Salla أو متجر مخصص جاهز للنمو.",
     leadButton: "اطلب تدقيقًا مجانيًا",
     adLabel: "إعلان",
     formula: "المعادلة والملاحظات",
@@ -606,7 +606,7 @@ export const copy = {
     instantResult: "نتيجة فورية",
     copied: "تم النسخ",
     copyResult: "انسخ النتيجة",
-    
+
     // Contact & Audit Form
     phone: "رقم الهاتف",
     phonePlaceholder: "+966 50 000 0000",
@@ -619,13 +619,14 @@ export const copy = {
     submitForm: "إرسال طلب التدقيق",
     submitting: "جاري الإرسال...",
     successTitle: "تم استلام الطلب بنجاح!",
-    successText: "شكرًا لك! لقد استلمنا طلبك وسيقوم فريقنا بتحليل متجرك بدقة. سنتواصل معك خلال 48 ساعة.",
+    successText:
+      "شكرًا لك! لقد استلمنا طلبك وسيقوم فريقنا بتحليل متجرك بدقة. سنتواصل معك خلال 48 ساعة.",
     backHome: "العودة للرئيسية",
     nameLabel: "الاسم",
     namePlaceholder: "اسمك الكامل",
     emailLabel: "البريد الإلكتروني",
     emailFieldPlaceholder: "you@store.com",
-    
+
     // Platforms
     platformShopify: "Shopify",
     platformSalla: "سلة (Salla)",
@@ -689,9 +690,10 @@ export const copy = {
     category: "التصنيف",
     btnGenerateAi: "إنشاء بذكاء Gemini AI",
     writingAi: "جاري الكتابة بذكاء Gemini...",
-    errMissingKey: "مفتاح Gemini API غير مفعّل. أضف GEMINI_API_KEY في ملف .env.local لتفعيل الذكاء الاصطناعي الحقيقي.",
-    templatePreview: "معاينة القالب (الخيار الاحتياطي بدون ذكاء اصطناعي)"
-  }
+    errMissingKey:
+      "مفتاح Gemini API غير مفعّل. أضف GEMINI_API_KEY في ملف .env.local لتفعيل الذكاء الاصطناعي الحقيقي.",
+    templatePreview: "معاينة القالب (الخيار الاحتياطي بدون ذكاء اصطناعي)",
+  },
 };
 
 export function getTool(slug: string) {

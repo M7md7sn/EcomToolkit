@@ -1,9 +1,10 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, BookOpen, Layers } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { ToolCard } from "@/components/tool-card";
-import { getPostBySlug } from "@/lib/actions/blog";
-import { tools, copy } from "@/lib/content";
+import { AdSlot } from "@/components/ad-slot";
+import { getPostBySlug, type Post } from "@/lib/actions/blog";
+import { tools } from "@/lib/content";
 import { isLocale, type Locale } from "@/lib/i18n";
 import fs from "fs";
 import path from "path";
@@ -15,9 +16,9 @@ export function generateStaticParams() {
     if (!fs.existsSync(filePath)) return [];
     const fileContent = fs.readFileSync(filePath, "utf-8");
     const posts = JSON.parse(fileContent || "[]");
-    return posts.flatMap((post: any) => [
+    return posts.flatMap((post: Post) => [
       { locale: "en", slug: post.slug },
-      { locale: "ar", slug: post.slug }
+      { locale: "ar", slug: post.slug },
     ]);
   } catch (error) {
     console.error("Failed to generate static params for blog:", error);
@@ -27,7 +28,7 @@ export function generateStaticParams() {
 
 // Generate dynamic metadata
 export async function generateMetadata({
-  params
+  params,
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }) {
@@ -39,20 +40,17 @@ export async function generateMetadata({
   const post = res.data;
 
   return {
-    title: `${isLocale(locale) && locale === "ar" ? post.titleAr : post.titleEn} | ${isLocale(locale) && locale === "ar" ? "تاجر تولز" : "TajerTools"}`,
-    description: isLocale(locale) && locale === "ar" ? post.introAr : post.introEn
+    title: `${current === "ar" ? post.titleAr : post.titleEn} | ${current === "ar" ? "تاجر تولز" : "TajerTools"}`,
+    description: current === "ar" ? post.introAr : post.introEn,
   };
 }
 
-// Simple Markdown to HTML Parser
-function renderMarkdownToHtml(markdown: string): string {
-  if (!markdown) return "";
+// Simple Markdown to HTML Parser (returning blocks array)
+function renderMarkdownToHtmlBlocks(markdown: string): string[] {
+  if (!markdown) return [];
 
   // Replace HTML tags to prevent raw HTML injection/XSS
-  let html = markdown
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
+  let html = markdown.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
   // Headings
   html = html.replace(/^### (.*$)/gim, "<h3>$1</h3>");
@@ -78,7 +76,7 @@ function renderMarkdownToHtml(markdown: string): string {
   const processed = blocks.map((block) => {
     const trimmed = block.trim();
     if (!trimmed) return "";
-    
+
     // If block starts with HTML tag, leave it as is
     if (
       trimmed.startsWith("<h") ||
@@ -88,23 +86,22 @@ function renderMarkdownToHtml(markdown: string): string {
     ) {
       return block;
     }
-    
+
     // Otherwise, wrap in paragraph
     return `<p>${block}</p>`;
   });
 
-  return processed.filter(Boolean).join("\n");
+  return processed.filter(Boolean);
 }
 
 export default async function BlogPostPage({
-  params
+  params,
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const { locale: rawLocale, slug } = await params;
   if (!isLocale(rawLocale)) notFound();
   const locale = rawLocale as Locale;
-  const t = copy[locale];
   const isAr = locale === "ar";
 
   const res = await getPostBySlug(slug);
@@ -121,7 +118,10 @@ export default async function BlogPostPage({
     .map((toolSlug) => tools.find((tool) => tool.slug === toolSlug))
     .filter((tool) => Boolean(tool));
 
-  const parsedHtml = renderMarkdownToHtml(content);
+  const parsedBlocks = renderMarkdownToHtmlBlocks(content);
+  const midIndex = Math.floor(parsedBlocks.length / 2);
+  const firstHalf = parsedBlocks.slice(0, midIndex).join("\n");
+  const secondHalf = parsedBlocks.slice(midIndex).join("\n");
 
   return (
     <main className="page-main article-view-page">
@@ -138,11 +138,23 @@ export default async function BlogPostPage({
         <p className="article-intro-text">{intro}</p>
       </article>
 
-      <section className="article-body-wrapper explain-panel">
-        <div 
-          className="markdown-body" 
-          dangerouslySetInnerHTML={{ __html: parsedHtml }} 
-        />
+      {/* Hero Ad Slot */}
+      <AdSlot locale={locale} />
+
+      <section
+        className="article-body-wrapper explain-panel"
+        style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+      >
+        {firstHalf && (
+          <div className="markdown-body" dangerouslySetInnerHTML={{ __html: firstHalf }} />
+        )}
+
+        {/* Mid-Article Ad Slot */}
+        <AdSlot locale={locale} compact />
+
+        {secondHalf && (
+          <div className="markdown-body" dangerouslySetInnerHTML={{ __html: secondHalf }} />
+        )}
       </section>
 
       {relatedTools.length > 0 && (

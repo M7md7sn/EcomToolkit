@@ -4,12 +4,9 @@ import { getPosts } from "@/lib/actions/blog";
 import { copy } from "@/lib/content";
 import Link from "next/link";
 import { ArrowRight, BookOpen } from "lucide-react";
+import { AdSlot } from "@/components/ad-slot";
 
-export default async function BlogPage({
-  params
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function BlogPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   if (!isLocale(rawLocale)) notFound();
   const locale = rawLocale as Locale;
@@ -30,6 +27,8 @@ export default async function BlogPage({
             : "Learn how to improve store margins, price products effectively, and optimize your ad campaigns."}
         </p>
       </section>
+
+      <AdSlot locale={locale} />
 
       {posts.length === 0 ? (
         <div className="empty-submissions-card">

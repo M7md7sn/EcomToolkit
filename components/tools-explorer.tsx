@@ -1,18 +1,31 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { Search, Sparkles, Filter, X } from "lucide-react";
-import { tools, categories, copy } from "@/lib/content";
+import { tools, categories } from "@/lib/content";
 import { ToolCard } from "./tool-card";
 import type { Locale } from "@/lib/i18n";
 
 export function ToolsExplorer({ locale }: { locale: Locale }) {
-  const t = copy[locale];
   const isAr = locale === "ar";
-  
-  const [searchQuery, setSearchQuery] = useState("");
+
+  const searchParams = useSearchParams();
+  const initialQuery = searchParams ? searchParams.get("q") || "" : "";
+
+  const [searchQuery, setSearchQuery] = useState(initialQuery);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [toolTypeFilter, setToolTypeFilter] = useState<"all" | "calc" | "ai">("all");
+
+  // Sync searchQuery when URL query parameter 'q' changes
+  useEffect(() => {
+    if (searchParams) {
+      const q = searchParams.get("q");
+      if (q !== null) {
+        setSearchQuery(q);
+      }
+    }
+  }, [searchParams]);
 
   const filteredTools = useMemo(() => {
     return tools.filter((tool) => {
@@ -26,8 +39,10 @@ export function ToolsExplorer({ locale }: { locale: Locale }) {
       const matchesCategory = selectedCategory === "all" || tool.category === selectedCategory;
 
       // 3. Tool Type filter (AI generator vs Calculator)
-      const isAiTool = ["description", "meta", "returnPolicy", "shippingPolicy"].includes(tool.type);
-      const matchesType = 
+      const isAiTool = ["description", "meta", "returnPolicy", "shippingPolicy"].includes(
+        tool.type,
+      );
+      const matchesType =
         toolTypeFilter === "all" ||
         (toolTypeFilter === "ai" && isAiTool) ||
         (toolTypeFilter === "calc" && !isAiTool);
@@ -53,7 +68,11 @@ export function ToolsExplorer({ locale }: { locale: Locale }) {
             className="explorer-search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder={isAr ? "ابحث عن الأدوات... مثلاً: ربح، ROAS، شحن" : "Search tools... e.g. profit, ROAS, shipping"}
+            placeholder={
+              isAr
+                ? "ابحث عن الأدوات... مثلاً: ربح، ROAS، شحن"
+                : "Search tools... e.g. profit, ROAS, shipping"
+            }
           />
           {searchQuery && (
             <button className="clear-search-btn" onClick={() => setSearchQuery("")}>

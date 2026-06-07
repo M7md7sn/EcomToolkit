@@ -5,7 +5,7 @@ import type { Locale } from "@/lib/i18n";
 
 const badges = {
   en: ["Most used", "Recommended", "Most visited", "New", "Popular", "Fast result"],
-  ar: ["الأكثر استخدامًا", "موصى به", "الأكثر زيارة", "جديد", "شائع", "نتيجة سريعة"]
+  ar: ["الأكثر استخدامًا", "موصى به", "الأكثر زيارة", "جديد", "شائع", "نتيجة سريعة"],
 };
 
 const usage = ["8.4k", "7.9k", "7.1k", "6.8k", "6.2k", "5.9k", "5.4k"];
@@ -14,7 +14,7 @@ export function ToolCard({
   tool,
   locale,
   featured = false,
-  rank = 0
+  rank = 0,
 }: {
   tool: Tool;
   locale: Locale;

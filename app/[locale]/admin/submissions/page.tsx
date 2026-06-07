@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useEffect, useState, useTransition } from "react";
+import { use, useEffect, useState } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { isLocale, type Locale } from "@/lib/i18n";
@@ -13,12 +13,7 @@ import {
   isAuthenticated,
   type Submission,
 } from "@/lib/actions/contact";
-import {
-  getPosts,
-  savePost,
-  deletePost,
-  type Post,
-} from "@/lib/actions/blog";
+import { getPosts, savePost, deletePost, type Post } from "@/lib/actions/blog";
 import {
   Lock,
   Search,
@@ -43,11 +38,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 
-export default function AdminSubmissionsPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default function AdminSubmissionsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = use(params);
   if (!isLocale(rawLocale)) notFound();
   const locale = rawLocale as Locale;
@@ -73,12 +64,12 @@ export default function AdminSubmissionsPage({
   // Modals & Forms
   const [selectedSub, setSelectedSub] = useState<Submission | null>(null);
   const [subToDelete, setSubToDelete] = useState<string | null>(null);
-  
+
   const [articleToDelete, setArticleToDelete] = useState<string | null>(null);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [editorError, setEditorError] = useState("");
   const [editorSuccess, setEditorSuccess] = useState("");
-  
+
   // Editor Form Fields
   const [formSlug, setFormSlug] = useState("");
   const [formTitleEn, setFormTitleEn] = useState("");
@@ -92,12 +83,10 @@ export default function AdminSubmissionsPage({
   const [formTools, setFormTools] = useState<string[]>([]);
   const [isEditing, setIsEditing] = useState(false);
 
-  // Transitions
-  const [isPending, startTransition] = useTransition();
-
   // Check auth and load data on mount
   useEffect(() => {
     checkAuthentication();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function checkAuthentication() {
@@ -208,7 +197,7 @@ export default function AdminSubmissionsPage({
   // Handle Tool Checkbox Toggle
   function handleToolToggle(toolSlug: string) {
     setFormTools((prev) =>
-      prev.includes(toolSlug) ? prev.filter((s) => s !== toolSlug) : [...prev, toolSlug]
+      prev.includes(toolSlug) ? prev.filter((s) => s !== toolSlug) : [...prev, toolSlug],
     );
   }
 
@@ -219,11 +208,18 @@ export default function AdminSubmissionsPage({
     setEditorSuccess("");
 
     if (!formSlug.trim() || !formTitleEn.trim() || !formTitleAr.trim()) {
-      setEditorError(isAr ? "يرجى تعبئة الحقول الأساسية (الرابط، العنوان بالإنجليزية، والعنوان بالعربية)." : "Please fill in essential fields (Slug, Title English, Title Arabic).");
+      setEditorError(
+        isAr
+          ? "يرجى تعبئة الحقول الأساسية (الرابط، العنوان بالإنجليزية، والعنوان بالعربية)."
+          : "Please fill in essential fields (Slug, Title English, Title Arabic).",
+      );
       return;
     }
 
-    const cleanedSlug = formSlug.toLowerCase().replace(/[^a-z0-9\-]/g, "-").replace(/-+/g, "-");
+    const cleanedSlug = formSlug
+      .toLowerCase()
+      .replace(/[^a-z0-9\-]/g, "-")
+      .replace(/-+/g, "-");
 
     const articleData: Post = {
       slug: cleanedSlug,
@@ -241,7 +237,9 @@ export default function AdminSubmissionsPage({
 
     const res = await savePost(articleData);
     if (res.success) {
-      setEditorSuccess(t.postSavedSuccess || (isAr ? "تم حفظ المقال بنجاح!" : "Article saved successfully!"));
+      setEditorSuccess(
+        t.postSavedSuccess || (isAr ? "تم حفظ المقال بنجاح!" : "Article saved successfully!"),
+      );
       loadArticles();
       setTimeout(() => {
         setIsEditorOpen(false);
@@ -255,7 +253,16 @@ export default function AdminSubmissionsPage({
   function handleExportSubmissionsCSV() {
     if (filteredSubmissions.length === 0) return;
 
-    const headers = ["ID", "Date", "Name", "Email", "Phone", "Platform", "Sales Volume", "Store URL / Idea"];
+    const headers = [
+      "ID",
+      "Date",
+      "Name",
+      "Email",
+      "Phone",
+      "Platform",
+      "Sales Volume",
+      "Store URL / Idea",
+    ];
     const rows = filteredSubmissions.map((sub) => [
       sub.id,
       new Date(sub.createdAt).toLocaleString(locale === "ar" ? "ar-EG" : "en-US"),
@@ -269,7 +276,10 @@ export default function AdminSubmissionsPage({
 
     const csvContent =
       "\uFEFF" + // UTF-8 BOM for Arabic excel compatibility
-      [headers.join(","), ...rows.map((r) => r.map((val) => `"${val.replace(/"/g, '""')}"`).join(","))].join("\n");
+      [
+        headers.join(","),
+        ...rows.map((r) => r.map((val) => `"${val.replace(/"/g, '""')}"`).join(",")),
+      ].join("\n");
 
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
@@ -665,7 +675,9 @@ export default function AdminSubmissionsPage({
                   <span className="detail-label">
                     <DollarSign size={14} /> {t.salesVolume}
                   </span>
-                  <span className="detail-value sales-volume-pill">{selectedSub.salesVolume || "—"}</span>
+                  <span className="detail-value sales-volume-pill">
+                    {selectedSub.salesVolume || "—"}
+                  </span>
                 </div>
 
                 <div className="detail-item">
@@ -723,7 +735,10 @@ export default function AdminSubmissionsPage({
               <button onClick={() => setSubToDelete(null)} className="secondary-button">
                 {isAr ? "إلغاء" : "Cancel"}
               </button>
-              <button onClick={() => handleDeleteSubmission(subToDelete)} className="primary-button danger-btn">
+              <button
+                onClick={() => handleDeleteSubmission(subToDelete)}
+                className="primary-button danger-btn"
+              >
                 {t.delete}
               </button>
             </div>
@@ -739,12 +754,20 @@ export default function AdminSubmissionsPage({
               <Trash2 size={24} />
             </div>
             <h2>{isAr ? "حذف المقال" : "Delete Article"}</h2>
-            <p>{t.confirmDeleteArticle || (isAr ? "هل أنت متأكد من رغبتك في حذف هذا المقال؟" : "Are you sure you want to delete this article?")}</p>
+            <p>
+              {t.confirmDeleteArticle ||
+                (isAr
+                  ? "هل أنت متأكد من رغبتك في حذف هذا المقال؟"
+                  : "Are you sure you want to delete this article?")}
+            </p>
             <div className="confirm-actions">
               <button onClick={() => setArticleToDelete(null)} className="secondary-button">
                 {isAr ? "إلغاء" : "Cancel"}
               </button>
-              <button onClick={() => handleDeleteArticle(articleToDelete)} className="primary-button danger-btn">
+              <button
+                onClick={() => handleDeleteArticle(articleToDelete)}
+                className="primary-button danger-btn"
+              >
                 {t.delete}
               </button>
             </div>
@@ -785,7 +808,10 @@ export default function AdminSubmissionsPage({
                 <div className="editor-form-grid">
                   {/* Slug */}
                   <label className="input-line">
-                    <span>{t.slugLabel || (isAr ? "رابط المقال (Slug)" : "URL Slug")} <span className="required-star">*</span></span>
+                    <span>
+                      {t.slugLabel || (isAr ? "رابط المقال (Slug)" : "URL Slug")}{" "}
+                      <span className="required-star">*</span>
+                    </span>
                     <input
                       value={formSlug}
                       onChange={(e) => setFormSlug(e.target.value)}
@@ -798,7 +824,10 @@ export default function AdminSubmissionsPage({
                   {/* Categories */}
                   <div className="form-grid-two-col">
                     <label className="input-line">
-                      <span>{t.categoryLabelEn || (isAr ? "التصنيف (بالإنجليزية)" : "Category (English)")}</span>
+                      <span>
+                        {t.categoryLabelEn ||
+                          (isAr ? "التصنيف (بالإنجليزية)" : "Category (English)")}
+                      </span>
                       <input
                         value={formCategoryEn}
                         onChange={(e) => setFormCategoryEn(e.target.value)}
@@ -807,7 +836,9 @@ export default function AdminSubmissionsPage({
                     </label>
 
                     <label className="input-line">
-                      <span>{t.categoryLabelAr || (isAr ? "التصنيف (بالعربية)" : "Category (Arabic)")}</span>
+                      <span>
+                        {t.categoryLabelAr || (isAr ? "التصنيف (بالعربية)" : "Category (Arabic)")}
+                      </span>
                       <input
                         value={formCategoryAr}
                         onChange={(e) => setFormCategoryAr(e.target.value)}
@@ -819,7 +850,10 @@ export default function AdminSubmissionsPage({
                   {/* Titles */}
                   <div className="form-grid-two-col">
                     <label className="input-line">
-                      <span>{t.titleLabelEn || (isAr ? "العنوان (بالإنجليزية)" : "Title (English)")} <span className="required-star">*</span></span>
+                      <span>
+                        {t.titleLabelEn || (isAr ? "العنوان (بالإنجليزية)" : "Title (English)")}{" "}
+                        <span className="required-star">*</span>
+                      </span>
                       <input
                         value={formTitleEn}
                         onChange={(e) => setFormTitleEn(e.target.value)}
@@ -829,7 +863,10 @@ export default function AdminSubmissionsPage({
                     </label>
 
                     <label className="input-line">
-                      <span>{t.titleLabelAr || (isAr ? "العنوان (بالعربية)" : "Title (Arabic)")} <span className="required-star">*</span></span>
+                      <span>
+                        {t.titleLabelAr || (isAr ? "العنوان (بالعربية)" : "Title (Arabic)")}{" "}
+                        <span className="required-star">*</span>
+                      </span>
                       <input
                         value={formTitleAr}
                         onChange={(e) => setFormTitleAr(e.target.value)}
@@ -842,7 +879,10 @@ export default function AdminSubmissionsPage({
                   {/* Intros */}
                   <div className="form-grid-two-col">
                     <label className="input-line">
-                      <span>{t.introLabelEn || (isAr ? "المقدمة (بالإنجليزية)" : "Introduction (English)")}</span>
+                      <span>
+                        {t.introLabelEn ||
+                          (isAr ? "المقدمة (بالإنجليزية)" : "Introduction (English)")}
+                      </span>
                       <textarea
                         rows={2}
                         value={formIntroEn}
@@ -852,7 +892,9 @@ export default function AdminSubmissionsPage({
                     </label>
 
                     <label className="input-line">
-                      <span>{t.introLabelAr || (isAr ? "المقدمة (بالعربية)" : "Introduction (Arabic)")}</span>
+                      <span>
+                        {t.introLabelAr || (isAr ? "المقدمة (بالعربية)" : "Introduction (Arabic)")}
+                      </span>
                       <textarea
                         rows={2}
                         value={formIntroAr}
@@ -864,7 +906,12 @@ export default function AdminSubmissionsPage({
 
                   {/* Contents (Markdown) */}
                   <label className="input-line">
-                    <span>{t.contentLabelEn || (isAr ? "المحتوى (بالإنجليزية - Markdown)" : "Content (English - Markdown)")}</span>
+                    <span>
+                      {t.contentLabelEn ||
+                        (isAr
+                          ? "المحتوى (بالإنجليزية - Markdown)"
+                          : "Content (English - Markdown)")}
+                    </span>
                     <textarea
                       rows={8}
                       value={formContentEn}
@@ -875,7 +922,10 @@ export default function AdminSubmissionsPage({
                   </label>
 
                   <label className="input-line">
-                    <span>{t.contentLabelAr || (isAr ? "المحتوى (بالعربية - Markdown)" : "Content (Arabic - Markdown)")}</span>
+                    <span>
+                      {t.contentLabelAr ||
+                        (isAr ? "المحتوى (بالعربية - Markdown)" : "Content (Arabic - Markdown)")}
+                    </span>
                     <textarea
                       rows={8}
                       value={formContentAr}
@@ -887,7 +937,9 @@ export default function AdminSubmissionsPage({
 
                   {/* Related Tools Multiselect */}
                   <div className="editor-tools-checkboxes">
-                    <span>{t.relatedToolsLabel || (isAr ? "الأدوات المرتبطة" : "Related Tools")}</span>
+                    <span>
+                      {t.relatedToolsLabel || (isAr ? "الأدوات المرتبطة" : "Related Tools")}
+                    </span>
                     <div className="tools-checkbox-grid">
                       {allToolsList.map((tool) => (
                         <label key={tool.slug} className="tool-checkbox-item">

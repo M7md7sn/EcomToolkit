@@ -2,11 +2,7 @@ import { notFound } from "next/navigation";
 import { isLocale, type Locale } from "@/lib/i18n";
 import { ContactForm } from "@/components/contact-form";
 
-export default async function ContactPage({
-  params
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   if (!isLocale(rawLocale)) notFound();
   const locale = rawLocale as Locale;
@@ -22,7 +18,7 @@ export default async function ContactPage({
             : "Fill in the details below and we will audit your store's speed, conversion rate, profitability, and design. Get tailored recommendations in 48 hours."}
         </p>
       </section>
-      
+
       <ContactForm locale={locale} />
     </main>
   );

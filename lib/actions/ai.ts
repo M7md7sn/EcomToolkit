@@ -114,7 +114,7 @@ async function fetchGeminiContent(prompt: string, apiKey: string): Promise<Respo
               },
             ],
           }),
-        }
+        },
       );
 
       lastResponse = apiResponse;
@@ -127,7 +127,9 @@ async function fetchGeminiContent(prompt: string, apiKey: string): Promise<Respo
       const isServerError = apiResponse.status >= 500;
       const isRateLimit = apiResponse.status === 429;
       if (isServerError || isRateLimit) {
-        console.warn(`Gemini API returned status ${apiResponse.status}. Retrying attempt ${attempt}/${maxRetries} in ${currentDelay}ms...`);
+        console.warn(
+          `Gemini API returned status ${apiResponse.status}. Retrying attempt ${attempt}/${maxRetries} in ${currentDelay}ms...`,
+        );
         if (attempt < maxRetries) {
           await new Promise((resolve) => setTimeout(resolve, currentDelay));
           currentDelay *= 2;
@@ -135,7 +137,7 @@ async function fetchGeminiContent(prompt: string, apiKey: string): Promise<Respo
         }
       }
       return apiResponse; // Return immediately if it's a client error (e.g., 400, 403)
-    } catch (fetchError: any) {
+    } catch (fetchError) {
       console.error(`Gemini fetch attempt ${attempt} threw an error:`, fetchError);
       if (attempt === maxRetries) {
         throw fetchError;
@@ -157,7 +159,7 @@ async function fetchGeminiContent(prompt: string, apiKey: string): Promise<Respo
 export async function generateAiCopy(
   type: string,
   locale: "en" | "ar",
-  inputs: string[]
+  inputs: string[],
 ): Promise<{ success: boolean; text?: string; error?: string; code?: string }> {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
@@ -183,8 +185,9 @@ export async function generateAiCopy(
     }
 
     return { success: true, text: resultText };
-  } catch (error: any) {
+  } catch (error) {
     console.error("Gemini Fetch error:", error);
-    return { success: false, error: error.message || "Failed to contact Gemini server." };
+    const message = error instanceof Error ? error.message : "Failed to contact Gemini server.";
+    return { success: false, error: message };
   }
 }

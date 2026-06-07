@@ -1,30 +1,27 @@
 import Link from "next/link";
-import {
-  ArrowRight,
-  BookOpen,
-  CheckCircle2,
-  ExternalLink,
-  Search,
-  Sparkles
-} from "lucide-react";
+import { Suspense } from "react";
+import { ArrowRight, BookOpen, CheckCircle2, ExternalLink, Search, Sparkles } from "lucide-react";
 import { AdSlot } from "@/components/ad-slot";
 import { QuickProfitCalculator } from "@/components/quick-profit-calculator";
 import { ToolsExplorer } from "@/components/tools-explorer";
-import { copy, tools } from "@/lib/content";
+import { copy } from "@/lib/content";
 import { isLocale, type Locale } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 
 const socialProof = {
   en: [
     { value: "12,000+", label: "calculations completed across the tools" },
-    { value: "Shopify · Salla · WooCommerce", label: "built for the platforms sellers already use" },
-    { value: "15", label: "MVP tools for profit, ROAS, pricing, shipping, and fees" }
+    {
+      value: "Shopify · Salla · WooCommerce",
+      label: "built for the platforms sellers already use",
+    },
+    { value: "15", label: "MVP tools for profit, ROAS, pricing, shipping, and fees" },
   ],
   ar: [
     { value: "+12,000", label: "عملية حساب تمت عبر الأدوات" },
     { value: "Shopify · Salla · WooCommerce", label: "مناسبة للمنصات التي يستخدمها أصحاب المتاجر" },
-    { value: "15", label: "أداة MVP للربحية وROAS والتسعير والشحن والعمولات" }
-  ]
+    { value: "15", label: "أداة MVP للربحية وROAS والتسعير والشحن والعمولات" },
+  ],
 };
 
 const guideArticles = {
@@ -32,63 +29,59 @@ const guideArticles = {
     {
       title: "How to calculate true ecommerce profit",
       category: "Profitability",
-      href: "/blog/ecommerce-profit-calculation"
+      href: "/blog/ecommerce-profit-calculation",
     },
     {
       title: "Best profit margin for clothing stores",
       category: "Pricing",
-      href: "/blog/clothing-profit-margin"
+      href: "/blog/clothing-profit-margin",
     },
     {
       title: "ROAS explained for beginners",
       category: "Marketing",
-      href: "/blog/roas-for-beginners"
+      href: "/blog/roas-for-beginners",
     },
     {
       title: "How to price products professionally",
       category: "Pricing",
-      href: "/blog/product-pricing-strategy"
+      href: "/blog/product-pricing-strategy",
     },
     {
       title: "Shipping costs in Egypt and Saudi Arabia",
       category: "Shipping",
-      href: "/blog/shipping-cost-egypt-saudi"
-    }
+      href: "/blog/shipping-cost-egypt-saudi",
+    },
   ],
   ar: [
     {
       title: "كيفية حساب ربح متجر إلكتروني",
       category: "الربحية",
-      href: "/blog/ecommerce-profit-calculation"
+      href: "/blog/ecommerce-profit-calculation",
     },
     {
       title: "أفضل هامش ربح للملابس",
       category: "التسعير",
-      href: "/blog/clothing-profit-margin"
+      href: "/blog/clothing-profit-margin",
     },
     {
       title: "شرح ROAS للمبتدئين",
       category: "التسويق",
-      href: "/blog/roas-for-beginners"
+      href: "/blog/roas-for-beginners",
     },
     {
       title: "كيفية تسعير المنتجات باحتراف",
       category: "التسعير",
-      href: "/blog/product-pricing-strategy"
+      href: "/blog/product-pricing-strategy",
     },
     {
       title: "تكلفة الشحن في مصر والسعودية",
       category: "الشحن",
-      href: "/blog/shipping-cost-egypt-saudi"
-    }
-  ]
+      href: "/blog/shipping-cost-egypt-saudi",
+    },
+  ],
 };
 
-export async function generateMetadata({
-  params
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const current = isLocale(locale) ? locale : "en";
   const title =
@@ -106,17 +99,13 @@ export async function generateMetadata({
       canonical: `/${current}`,
       languages: {
         en: "/en",
-        ar: "/ar"
-      }
-    }
+        ar: "/ar",
+      },
+    },
   };
 }
 
-export default async function HomePage({
-  params
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   if (!isLocale(rawLocale)) notFound();
   const locale = rawLocale as Locale;
@@ -131,9 +120,7 @@ export default async function HomePage({
             {isAr ? "مجموعة أدوات تشغيل التجارة الإلكترونية" : "INTUITIVE COMMERCE OPERATING SUITE"}
           </span>
           <h1>
-            {isAr
-              ? "اجعل كل طلب يثبت ربحيته قبل شحنه."
-              : "Make every order prove its profit."}
+            {isAr ? "اجعل كل طلب يثبت ربحيته قبل شحنه." : "Make every order prove its profit."}
           </h1>
           <p>
             {isAr
@@ -163,7 +150,7 @@ export default async function HomePage({
             {[
               isAr ? "مخصص للمتاجر العربية" : "Built for Arabic and global stores",
               isAr ? "يربط الأدوات بالمقالات" : "Tools connected to SEO guides",
-              isAr ? "تجربة مناسبة لـ AdSense" : "AdSense-friendly content flow"
+              isAr ? "تجربة مناسبة لـ AdSense" : "AdSense-friendly content flow",
             ].map((point) => (
               <span key={point}>
                 <CheckCircle2 size={16} />
@@ -191,7 +178,9 @@ export default async function HomePage({
       <section className="section-block" id="tools-explorer-section">
         <div className="section-heading">
           <div>
-            <span className="eyebrow">{isAr ? "مكتبة الأدوات التفاعلية" : "Interactive Tools Hub"}</span>
+            <span className="eyebrow">
+              {isAr ? "مكتبة الأدوات التفاعلية" : "Interactive Tools Hub"}
+            </span>
             <h2>{isAr ? "استكشف وشغّل الأدوات فوراً" : "Explore & run any tool instantly"}</h2>
           </div>
           <p>
@@ -200,7 +189,9 @@ export default async function HomePage({
               : "Search by keyword, filter by category, or discover AI generators instantly in one place."}
           </p>
         </div>
-        <ToolsExplorer locale={locale} />
+        <Suspense fallback={<div>{isAr ? "جاري التحميل..." : "Loading tools..."}</div>}>
+          <ToolsExplorer locale={locale} />
+        </Suspense>
       </section>
 
       <section className="section-block guide-section">
@@ -236,8 +227,6 @@ export default async function HomePage({
         </div>
       </section>
 
-
-
       <section className="case-study-band">
         <div className="store-mockup" aria-hidden="true">
           <div className="mockup-top">
@@ -257,7 +246,11 @@ export default async function HomePage({
 
         <div className="case-study-copy">
           <span className="eyebrow">{isAr ? "خدمات بناء المتاجر" : "Ecommerce development"}</span>
-          <h2>{isAr ? "هل تريد متجرًا إلكترونيًا جاهزًا للنمو؟" : "Want an ecommerce store ready to grow?"}</h2>
+          <h2>
+            {isAr
+              ? "هل تريد متجرًا إلكترونيًا جاهزًا للنمو؟"
+              : "Want an ecommerce store ready to grow?"}
+          </h2>
           <p>
             {isAr
               ? "نصمم متاجر Shopify و WooCommerce و Salla مهيأة للربحية والتحويلات، مع صفحات منتجات واضحة ومسارات شراء أسرع."
@@ -270,7 +263,9 @@ export default async function HomePage({
             </li>
             <li>
               <CheckCircle2 size={16} />
-              {isAr ? "تحسين صفحات المنتجات والتحويلات" : "Product page and conversion optimization"}
+              {isAr
+                ? "تحسين صفحات المنتجات والتحويلات"
+                : "Product page and conversion optimization"}
             </li>
             <li>
               <CheckCircle2 size={16} />

@@ -9,17 +9,22 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.svg?v=2",
     shortcut: "/favicon.svg?v=2",
-    apple: "/favicon.svg?v=2"
-  }
+    apple: "/favicon.svg?v=2",
+  },
 };
 
 export default function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/favicon.svg?v=2" />
+        <link rel="shortcut icon" href="/favicon.svg?v=2" />
+        <link rel="apple-touch-icon" href="/favicon.svg?v=2" />
+      </head>
       <body suppressHydrationWarning>{children}</body>
     </html>
   );
