@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Menu, Search, ShoppingBag } from "lucide-react";
+import { Menu, Search } from "lucide-react";
 import { copy } from "@/lib/content";
 import { oppositeLocale, type Locale } from "@/lib/i18n";
 import { ThemeToggle } from "./theme-toggle";
@@ -12,18 +12,18 @@ export function SiteHeader({ locale }: { locale: Locale }) {
     <header className="site-header">
       <Link className="brand-mark" href={`/${locale}`} aria-label={text.brand}>
         <span className="brand-icon">
-          <ShoppingBag size={20} style={{ color: "var(--brand)" }} />
+          <span className="brand-logo-mask" />
         </span>
         <span className="brand-text" style={{ fontWeight: 700, display: "flex", gap: "2px" }}>
           {locale === "ar" ? (
             <>
               <span>تاجر</span>
-              <span style={{ color: "var(--brand)" }}>كيت</span>
+              <span style={{ color: "var(--brand)" }}>تولز</span>
             </>
           ) : (
             <>
               <span>Tajer</span>
-              <span style={{ color: "var(--brand)" }}>Kit</span>
+              <span style={{ color: "var(--brand)" }}>Tools</span>
             </>
           )}
         </span>
