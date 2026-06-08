@@ -68,9 +68,13 @@ export async function submitAuditRequest(formData: {
     await writeJsonFile<Submission>(FILE_PATH, submissions);
 
     return { success: true };
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Failed to submit audit request:", error);
-    return { success: false, error: "Server error. Please try again." };
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    return {
+      success: false,
+      error: `Server error: ${errorMessage}`,
+    };
   }
 }
 
