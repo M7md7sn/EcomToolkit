@@ -1,81 +1,68 @@
+import { neon } from "@neondatabase/serverless";
 import fs from "fs";
 import path from "path";
 
 const DATA_DIR = path.join(process.cwd(), "data");
 
-// Support both Vercel KV and Upstash Redis env variable naming conventions
-const KV_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-const KV_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+/**
+ * Neon Postgres connection string from environment.
+ * Set DATABASE_URL in Vercel environment variables after creating a Neon Postgres database.
+ */
+const DATABASE_URL = process.env.DATABASE_URL;
+const USE_POSTGRES = !!DATABASE_URL;
 
-const USE_KV = !!(KV_URL && KV_TOKEN);
+/**
+ * Get a Neon SQL tagged-template client (serverless-compatible).
+ */
+function getSql() {
+  if (!DATABASE_URL) throw new Error("DATABASE_URL is not set");
+  return neon(DATABASE_URL);
+}
 
-// Fallback directory for serverless environments (read-only filesystem)
-const IS_SERVERLESS = !!process.env.VERCEL;
-const FALLBACK_WRITE_DIR = IS_SERVERLESS ? "/tmp/data" : DATA_DIR;
-
-function getKvKey(filePath: string): string {
+/**
+ * Derive a table name from a file path.
+ * e.g., "submissions.json" → "submissions"
+ */
+function getTableName(filePath: string): string {
   return path.basename(filePath, ".json");
 }
 
-function getFallbackWritePath(filePath: string): string {
-  return path.join(FALLBACK_WRITE_DIR, path.basename(filePath));
-}
-
 /**
- * Ensures that the local fallback database file exists.
+ * Ensures that a "kv_store" table exists for bulk JSON storage.
+ * This stores an entire JSON array under a single key for simplicity.
  */
-function ensureLocalDataFile(filePath: string): string {
-  const targetPath = getFallbackWritePath(filePath);
-  const targetDir = path.dirname(targetPath);
-
-  if (!fs.existsSync(targetDir)) {
-    fs.mkdirSync(targetDir, { recursive: true });
-  }
-
-  if (!fs.existsSync(targetPath)) {
-    // If the file exists in the read-only build directory, copy it over
-    const originalPath = path.join(DATA_DIR, path.basename(filePath));
-    if (fs.existsSync(originalPath)) {
-      try {
-        fs.copyFileSync(originalPath, targetPath);
-      } catch (err) {
-        console.error(`Failed to copy database file from ${originalPath} to ${targetPath}:`, err);
-        fs.writeFileSync(targetPath, JSON.stringify([]), "utf-8");
-      }
-    } else {
-      fs.writeFileSync(targetPath, JSON.stringify([]), "utf-8");
-    }
-  }
-
-  return targetPath;
+async function ensureKvTable(): Promise<void> {
+  const sql = getSql();
+  await sql`
+    CREATE TABLE IF NOT EXISTS kv_store (
+      key TEXT PRIMARY KEY,
+      value JSONB NOT NULL,
+      updated_at TIMESTAMPTZ DEFAULT NOW()
+    )
+  `;
 }
 
 /**
- * Reads a JSON list from Vercel KV (if configured) or fallback file.
+ * Reads a JSON list from Postgres (if configured) or local file.
  */
 export async function readJsonFile<T>(filePath: string): Promise<T[]> {
-  if (USE_KV) {
-    const key = getKvKey(filePath);
-    const url = `${KV_URL}/get/${key}`;
+  if (USE_POSTGRES) {
+    const key = getTableName(filePath);
     try {
-      const res = await fetch(url, {
-        headers: {
-          Authorization: `Bearer ${KV_TOKEN}`,
-        },
-        cache: "no-store",
-      });
-      if (!res.ok) throw new Error(`KV response error: ${res.statusText}`);
-      const payload = await res.json();
-      const resultStr = payload.result;
-      if (!resultStr) {
-        // If the key doesn't exist in KV, load from the local source file and write it to KV
+      await ensureKvTable();
+      const sql = getSql();
+      const rows = await sql`SELECT value FROM kv_store WHERE key = ${key}`;
+      if (rows.length === 0) {
+        // Key doesn't exist in Postgres yet — seed from local file
         const localData = readLocalJsonFile<T>(filePath);
-        await writeJsonFile<T>(filePath, localData);
+        if (localData.length > 0) {
+          await writeJsonFile<T>(filePath, localData);
+        }
         return localData;
       }
-      return JSON.parse(resultStr) as T[];
+      return rows[0].value as T[];
     } catch (error) {
-      console.error(`Failed to read from Vercel KV for key ${key}, falling back to file:`, error);
+      console.error(`Failed to read from Postgres for key "${key}":`, error);
       return readLocalJsonFile<T>(filePath);
     }
   } else {
@@ -84,24 +71,22 @@ export async function readJsonFile<T>(filePath: string): Promise<T[]> {
 }
 
 /**
- * Writes a JSON list to Vercel KV (if configured) or fallback file.
+ * Writes a JSON list to Postgres (if configured) or local file.
  */
 export async function writeJsonFile<T>(filePath: string, items: T[]): Promise<void> {
-  if (USE_KV) {
-    const key = getKvKey(filePath);
-    const url = `${KV_URL}/set/${key}`;
+  if (USE_POSTGRES) {
+    const key = getTableName(filePath);
     try {
-      const res = await fetch(url, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${KV_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(JSON.stringify(items)), // We store the stringified array in Redis
-      });
-      if (!res.ok) throw new Error(`KV set error: ${res.statusText}`);
+      await ensureKvTable();
+      const sql = getSql();
+      const jsonValue = JSON.stringify(items);
+      await sql`
+        INSERT INTO kv_store (key, value, updated_at)
+        VALUES (${key}, ${jsonValue}::jsonb, NOW())
+        ON CONFLICT (key) DO UPDATE SET value = ${jsonValue}::jsonb, updated_at = NOW()
+      `;
     } catch (error) {
-      console.error(`Failed to write to Vercel KV for key ${key}, falling back to file:`, error);
+      console.error(`Failed to write to Postgres for key "${key}":`, error);
       writeLocalJsonFile<T>(filePath, items);
     }
   } else {
@@ -109,23 +94,30 @@ export async function writeJsonFile<T>(filePath: string, items: T[]): Promise<vo
   }
 }
 
-// Local filesystem helpers
+// ───────────────────────────────────────────
+// Local filesystem helpers (dev environment)
+// ───────────────────────────────────────────
+
 function readLocalJsonFile<T>(filePath: string): T[] {
-  const targetPath = ensureLocalDataFile(filePath);
   try {
+    const targetPath = path.join(DATA_DIR, path.basename(filePath));
+    if (!fs.existsSync(targetPath)) return [];
     const fileContent = fs.readFileSync(targetPath, "utf-8");
     return JSON.parse(fileContent || "[]") as T[];
   } catch (error) {
-    console.error(`Failed to read local JSON file at ${targetPath}:`, error);
+    console.error(`Failed to read local JSON file:`, error);
     return [];
   }
 }
 
 function writeLocalJsonFile<T>(filePath: string, items: T[]): void {
-  const targetPath = ensureLocalDataFile(filePath);
   try {
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+    const targetPath = path.join(DATA_DIR, path.basename(filePath));
     fs.writeFileSync(targetPath, JSON.stringify(items, null, 2), "utf-8");
   } catch (error) {
-    console.error(`Failed to write local JSON file at ${targetPath}:`, error);
+    console.error(`Failed to write local JSON file:`, error);
   }
 }
